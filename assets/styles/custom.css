@@ -1,0 +1,24 @@
+:root {
+  --color2: #098ccf;
+  --color3: #2fa5e0;
+  --color4: #55bdf1;
+  --color1: #fca922;
+  --color5: #ffffff;
+}
+
+.bg-custom {
+  background-color: var(--color2);
+}
+
+h1 {
+  font-family: "Poppins", sans-serif;
+  font-weight: bold;
+}
+
+.nombre {
+  color: var(--color1);
+}
+
+.pet {
+  color: var(--color2);
+}
