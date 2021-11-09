@@ -14,6 +14,14 @@
   background-color: var(--color2);
 }
 
+.boton-comprar {
+  background-color: var(--color2);
+}
+
+.boton-comprar:hover {
+  background: var(--color1)
+}
+
 .foto {
   height: 500px;
   width: 500px;
@@ -23,6 +31,14 @@
 
 .foto1 {
   background-image: url(../img/img.jpg);
+}
+
+.foto2 {
+  background-image: url(../img/img4.jpg);
+}
+
+.foto3 {
+  background-image: url(../img/img3.jpg);
 }
 
 body {
@@ -46,12 +62,12 @@ h1 {
 }
 .card-border {
   border: solid 2px var(--color2);
-  border-radius: 20px;
+  border-radius: 10px;
   overflow: hidden;
   transition: ease-out 0.2s;
 }
 .card-border:hover {
-  transform: scale(1.05);
+  transform: scale(1.02);
 }
 .gradiente {
   background: #0ab1ff;
@@ -82,24 +98,21 @@ h1 {
 .section-title {
   font-weight: bold;
   transition: ease-out 0.2s;
+  color: #098ccf;
 }
 .section-title:hover {
   transform: scale(1.05);
+  color: var(--color1);
 }
-.img-section:hover {
+/* .img-section:hover {
   transform: rotate(-10deg);
+} */
+
+.precio {
+  color: var(--color2);
 }
 
-.img-juguetes {
-  background-image: url(../img/juguetes.jpg);
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-}
-
-.img-dogtor {
-  background-image: url(../img/dogtor.jpg);
-  background-size: cover;
-  background-position: center 30%;
-  background-repeat: no-repeat;
+.cantidad {
+  color: var(--color1);
+  font-weight: 600;
 }
