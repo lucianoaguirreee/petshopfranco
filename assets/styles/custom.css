@@ -89,17 +89,3 @@ h1 {
 .img-section:hover {
   transform: rotate(-10deg);
 }
-
-.img-juguetes {
-  background-image: url(../img/juguetes.jpg);
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-}
-
-.img-dogtor {
-  background-image: url(../img/dogtor.jpg);
-  background-size: cover;
-  background-position: center 30%;
-  background-repeat: no-repeat;
-}
