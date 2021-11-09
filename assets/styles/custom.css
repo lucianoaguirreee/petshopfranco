@@ -6,8 +6,27 @@
   --color5: #ffffff;
 }
 
+.text-color1 {
+  color: var(--color1);
+}
+
 .bg-custom {
   background-color: var(--color2);
+}
+
+.foto {
+  height: 500px;
+  width: 500px;
+  background-size: cover;
+  background-position: center;
+}
+
+.foto1 {
+  background-image: url(../img/img.jpg);
+}
+
+body {
+  font-family: "Poppins", sans-serif;
 }
 
 h1 {
@@ -36,7 +55,7 @@ h1 {
 }
 .gradiente {
   background: #0ab1ff;
-  background: linear-gradient(var(--color1),var(--color3));
+  background: linear-gradient(var(--color1), var(--color3));
   background-repeat: repeat-x;
   background-size: 75%;
 }
@@ -69,4 +88,18 @@ h1 {
 }
 .img-section:hover {
   transform: rotate(-10deg);
+}
+
+.img-juguetes {
+  background-image: url(../img/juguetes.jpg);
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.img-dogtor {
+  background-image: url(../img/dogtor.jpg);
+  background-size: cover;
+  background-position: center 30%;
+  background-repeat: no-repeat;
 }
