@@ -16,10 +16,11 @@
 
 .boton-comprar {
   background-color: var(--color2);
+  width: 200px;
 }
 
 .boton-comprar:hover {
-  background: var(--color1)
+  background: var(--color1);
 }
 
 .foto {
@@ -115,4 +116,14 @@ h1 {
 .cantidad {
   color: var(--color1);
   font-weight: 600;
+}
+
+.img-producto {
+  width: 200px;
+  height: 200px;
+}
+
+.card-size {
+  width: 300px;
+  height: 550px;
 }
