@@ -12,47 +12,99 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&display=swap" rel="stylesheet">
     <title>PetShop | Home</title>
 </head>
-<body>
-    <header class="sticky-top shadow bg-white">
-        <nav class="navbar navbar-expand-lg navbar-dark bg-custom">
-            <div class="container-fluid d-flex align-items-center">
-                <img src="./assets/img/logo.png" width="50" alt="" class="me-3">
-                <a class="navbar-brand" href="#">Franco PetShop</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
-                    data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
-                    aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                        <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="#">Home</a>
-                        </li>
 
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
-                                data-bs-toggle="dropdown" aria-expanded="false">
-                                Shop
-                            </a>
-                            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <li><a class="dropdown-item" href="#">Juguetes</a></li>
-                                <li><a class="dropdown-item" href="#">Farmacia</a></li>
-                            </ul>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">Contacto</a>
-                        </li>
-                    </ul>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-custom">
+        <div class="container-fluid d-flex align-items-center">
+            <img src="./assets/img/logo.png" width="50" alt="" class="me-3">
+            <a class="navbar-brand" href="#">Franco PetShop</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+                aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="#">Home</a>
+                    </li>
+
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                            data-bs-toggle="dropdown" aria-expanded="false">
+                            Shop
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <li><a class="dropdown-item" href="#">Juguetes</a></li>
+                            <li><a class="dropdown-item" href="#">Farmacia</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Contacto</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <header class="sticky-top shadow bg-white">
+        <div id="myCarousel" class="carousel slide" data-bs-ride="carousel">
+            <div class="carousel-indicators">
+                <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="0" class="active"
+                    aria-current="true" aria-label="Slide 1"></button>
+                <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="1" aria-label="Slide 2"></button>
+                <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="2" aria-label="Slide 3"></button>
+            </div>
+            <div class="carousel-inner">
+                <div class="carousel-item active">
+                    <img src="./assets/img/./hero_1.png" alt="">
+
+                    <!-- <div class="container">
+                        <div class="carousel-caption text-start">
+                            <h1>Example headline.</h1>
+                            <p>Some representative placeholder content for the first slide of the carousel.</p>
+                            <p><a class="btn btn-lg btn-primary" href="#">Sign up today</a></p>
+                        </div>
+                    </div> -->
+                </div>
+                <div class="carousel-item">
+                    <img src="./assets/img/./hero_1.png" alt="">
+
+                    <!-- <div class="container">
+                        <div class="carousel-caption">
+                            <h1>Another example headline.</h1>
+                            <p>Some representative placeholder content for the second slide of the carousel.</p>
+                            <p><a class="btn btn-lg btn-primary" href="#">Learn more</a></p>
+                        </div>
+                    </div> -->
+                </div>
+                <div class="carousel-item">
+                    <img src="./assets/img/./hero_1.png" alt="">
+
+                    <!-- <div class="container">
+                        <div class="carousel-caption text-end">
+                            <h1>One more for good measure.</h1>
+                            <p>Some representative placeholder content for the third slide of this carousel.</p>
+                            <p><a class="btn btn-lg btn-primary" href="#">Browse gallery</a></p>
+                        </div>
+                    </div> -->
                 </div>
             </div>
-        </nav>
+            <button class="carousel-control-prev" type="button" data-bs-target="#myCarousel" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#myCarousel" data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+            </button>
+        </div>
         <div class="d-flex justify-content-between align-items-center">
             <div class="d-flex align-items-center">
                 <h1><span class="nombre ps-3">Franco</span> <span class="pet">PetShop</span></h1>
             </div>
             <div class="d-flex align-items-center pe-4">
                 <a class="text-decoration-none" href="#">
-                <img class="my-phone" src="assets/img/telephone-blue-call.png" alt="phone"></a>
+                    <img class="my-phone" src="assets/img/telephone-blue-call.png" alt="phone"></a>
                 <a class="p-2 fs-5 text-decoration-none pet" href="#">+54 11 9876 5643</a>
             </div>
         </div>
@@ -68,35 +120,35 @@
                         <div class="col">
                             <div class="p-3 d-flex flex-column align-items-center">
                                 <a href="#" class="text-decoration-none">
-                                <img src="assets/img/product_img.jpeg" class="img-section" alt="card-1"></a>
+                                    <img src="assets/img/product_img.jpeg" class="img-section" alt="card-1"></a>
                                 <a href="#" class="h4 text-decoration-none section-title">Juguetes</a>
                             </div>
                         </div>
                         <div class="col">
                             <div class="p-3 d-flex flex-column align-items-center">
                                 <a href="#" class="text-decoration-none">
-                                <img src="assets/img/product_img.jpeg" class="img-section" alt="card-1"></a>
+                                    <img src="assets/img/product_img.jpeg" class="img-section" alt="card-1"></a>
                                 <a href="#" class="h4 text-decoration-none section-title">Farmacia</a>
                             </div>
                         </div>
                         <div class="col">
                             <div class="p-3 d-flex flex-column align-items-center">
                                 <a href="#" class="text-decoration-none">
-                                <img src="assets/img/product_img.jpeg" class="img-section" alt="card-1"></a>
+                                    <img src="assets/img/product_img.jpeg" class="img-section" alt="card-1"></a>
                                 <a href="#" class="h4 text-decoration-none section-title">Saber más</a>
                             </div>
                         </div>
                         <div class="col">
                             <div class="p-3 d-flex flex-column align-items-center">
                                 <a href="#" class="text-decoration-none">
-                                <img src="assets/img/product_img.jpeg" class="img-section" alt="card-1"></a>
+                                    <img src="assets/img/product_img.jpeg" class="img-section" alt="card-1"></a>
                                 <a href="#" class="h4 text-decoration-none section-title">Veterinari@s</a>
                             </div>
                         </div>
                     </div>
                 </div>
             </div><!-- FIN SECCION TIPOS PRODUCTOS -->
-    
+
             <div>
                 <div class="container">
                     <div class="row">
