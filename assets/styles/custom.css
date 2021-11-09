@@ -22,3 +22,28 @@ h1 {
 .pet {
   color: var(--color2);
 }
+.titulo {
+  color: var(--color5);
+}
+.card-border {
+  border: solid 2px var(--color2);
+  border-radius: 20px;
+  overflow: hidden;
+  transition: ease-out 0.2s;
+}
+.card-border:hover {
+  transform: scale(1.05);
+}
+.products {
+  background: #0ab1ff;
+  background: linear-gradient(var(--color1),var(--color3));
+  background-repeat: repeat-x;
+  background-size: 75%;
+}
+.img-product {
+  height: 120px;
+  width: 120px;
+  object-fit: cover;
+  object-position: center;
+  overflow: hidden;
+}
