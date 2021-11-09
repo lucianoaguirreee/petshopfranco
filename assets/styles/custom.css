@@ -22,3 +22,51 @@ h1 {
 .pet {
   color: var(--color2);
 }
+.titulo {
+  color: var(--color5);
+}
+.card-border {
+  border: solid 2px var(--color2);
+  border-radius: 20px;
+  overflow: hidden;
+  transition: ease-out 0.2s;
+}
+.card-border:hover {
+  transform: scale(1.05);
+}
+.gradiente {
+  background: #0ab1ff;
+  background: linear-gradient(var(--color1),var(--color3));
+  background-repeat: repeat-x;
+  background-size: 75%;
+}
+.img-product {
+  height: 120px;
+  width: 120px;
+  object-fit: cover;
+  object-position: center;
+  overflow: hidden;
+}
+.img-section {
+  height: 120px;
+  width: 120px;
+  border-radius: 50%;
+  object-fit: cover;
+  object-position: center;
+  overflow: hidden;
+}
+.my-phone {
+  height: 50px;
+  width: 50px;
+  border-radius: 50%;
+}
+.section-title {
+  font-weight: bold;
+  transition: ease-out 0.2s;
+}
+.section-title:hover {
+  transform: scale(1.05);
+}
+.img-section:hover {
+  transform: rotate(-10deg);
+}

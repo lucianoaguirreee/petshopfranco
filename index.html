@@ -13,7 +13,7 @@
     <title>PetShop | Home</title>
 </head>
 <body>
-    <header>
+    <header class="sticky-top shadow bg-white">
         <nav class="navbar navbar-expand-lg navbar-dark bg-custom">
             <div class="container-fluid d-flex align-items-center">
                 <img src="./assets/img/logo.png" width="50" alt="" class="me-3">
@@ -44,15 +44,125 @@
                         </li>
                     </ul>
                 </div>
+            </div>
         </nav>
+
+        <div class="d-flex justify-content-between align-items-center">
+            <div class="d-flex align-items-center">
+                <h1><span class="nombre ps-3">Franco</span> <span class="pet">PetShop</span></h1>
+            </div>
+            <div class="d-flex align-items-center pe-4">
+                <a class="text-decoration-none" href="#">
+                <img class="my-phone" src="assets/img/telephone-blue-call.png" alt="phone"></a>
+                <a class="p-2 fs-5 text-decoration-none pet" href="#">+54 11 9876 5643</a>
+            </div>
+        </div>
     </header>
     <main>
-        <h1><span class="nombre">Franco</span> <span class="pet">PetShop</span></h1>
+        <div class="gradiente">
+            <div>
+                <div class="container">
+                    <div class="row">
+                        <h2 class="pb-3 pt-3 titulo">Qué estás buscando?</h2>
+                    </div>
+                    <div class="row pb-4">
+                        <div class="col">
+                            <div class="p-3 d-flex flex-column align-items-center">
+                                <a href="#" class="text-decoration-none">
+                                <img src="assets/img/product_img.jpeg" class="img-section" alt="card-1"></a>
+                                <a href="#" class="h4 text-decoration-none section-title">Juguetes</a>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="p-3 d-flex flex-column align-items-center">
+                                <a href="#" class="text-decoration-none">
+                                <img src="assets/img/product_img.jpeg" class="img-section" alt="card-1"></a>
+                                <a href="#" class="h4 text-decoration-none section-title">Farmacia</a>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="p-3 d-flex flex-column align-items-center">
+                                <a href="#" class="text-decoration-none">
+                                <img src="assets/img/product_img.jpeg" class="img-section" alt="card-1"></a>
+                                <a href="#" class="h4 text-decoration-none section-title">Saber más</a>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="p-3 d-flex flex-column align-items-center">
+                                <a href="#" class="text-decoration-none">
+                                <img src="assets/img/product_img.jpeg" class="img-section" alt="card-1"></a>
+                                <a href="#" class="h4 text-decoration-none section-title">Veterinari@s</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div><!-- FIN SECCION TIPOS PRODUCTOS -->
+    
+            <div>
+                <div class="container">
+                    <div class="row">
+                        <h2 class="text-center pb-3 pt-3 titulo">Nuestros Productos</h2>
+                    </div>
+                    <div class="row pb-4">
+                        <div class="col">
+                            <div class="card w-100 card-border p-3 d-flex align-items-center">
+                                <img src="assets/img/product_img.jpeg" class="img-product" alt="card-1">
+                                <div>
+                                    <h5 class="card-title fw-bold text-center pt-3 nombre">Producto 1</h5>
+                                    <p class="card-text text-center">$ 5000</p>
+                                    <a href="#" class="btn btn-primary bg-custom">Agregar al carrito</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="card w-100 card-border p-3 d-flex align-items-center">
+                                <img src="assets/img/product_img.jpeg" class="img-product" alt="card-1">
+                                <div>
+                                    <h5 class="card-title fw-bold text-center pt-3 nombre">Producto 2</h5>
+                                    <p class="card-text text-center">$ 5000</p>
+                                    <a href="#" class="btn btn-primary bg-custom">Agregar al carrito</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="card w-100 card-border p-3 d-flex align-items-center">
+                                <img src="assets/img/product_img.jpeg" class="img-product" alt="card-1">
+                                <div>
+                                    <h5 class="card-title fw-bold text-center pt-3 nombre">Producto 3</h5>
+                                    <p class="card-text text-center">$ 5000</p>
+                                    <a href="#" class="btn btn-primary bg-custom">Agregar al carrito</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="card w-100 card-border p-3 d-flex align-items-center">
+                                <img src="assets/img/product_img.jpeg" class="img-product" alt="card-1">
+                                <div>
+                                    <h5 class="card-title fw-bold text-center pt-3 nombre">Producto 4</h5>
+                                    <p class="card-text text-center">$ 5000</p>
+                                    <a href="#" class="btn btn-primary bg-custom">Agregar al carrito</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="card w-100 card-border p-3 d-flex align-items-center">
+                                <img src="assets/img/product_img.jpeg" class="img-product" alt="card-1">
+                                <div>
+                                    <h5 class="card-title fw-bold text-center pt-3 nombre">Producto 5</h5>
+                                    <p class="card-text text-center">$ 5000</p>
+                                    <a href="#" class="btn btn-primary bg-custom">Agregar al carrito</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div><!-- FIN SECCION GALERIA PRODUCTOS -->
+        </div>
     </main>
     <footer>
         <div>
             <div class="d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top bg-custom">
-                <p class="ps-5 col-md-4 mb-0 text-white">&copy; 2021 Grupo 6, Inc</p>
+                <p class="ps-5 col-md-4 mb-0 text-white">&copy; 2021 | Grupo 5 Inc.</p>
 
                 <a href="/"
                     class="col-md-4 d-flex align-items-center justify-content-center mb-3 mb-md-0 me-md-auto link-dark text-decoration-none">
