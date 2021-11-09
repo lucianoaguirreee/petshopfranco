@@ -14,6 +14,14 @@
   background-color: var(--color2);
 }
 
+.boton-comprar {
+  background-color: var(--color2);
+}
+
+.boton-comprar:hover {
+  background: var(--color1)
+}
+
 .foto {
   height: 500px;
   width: 500px;
@@ -54,13 +62,12 @@ h1 {
 }
 .card-border {
   border: solid 2px var(--color2);
-  border-radius: 20px;
+  border-radius: 10px;
   overflow: hidden;
   transition: ease-out 0.2s;
 }
 .card-border:hover {
-  transform: scale(1.05);
-  
+  transform: scale(1.02);
 }
 .gradiente {
   background: #0ab1ff;
@@ -100,3 +107,12 @@ h1 {
 /* .img-section:hover {
   transform: rotate(-10deg);
 } */
+
+.precio {
+  color: var(--color2);
+}
+
+.cantidad {
+  color: var(--color1);
+  font-weight: 600;
+}
