@@ -398,6 +398,6 @@ ul {
   box-sizing: border-box;
 }
 
-.cart {
-  
+textarea {
+  max-height: 150px;
 }
