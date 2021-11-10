@@ -25,6 +25,14 @@
   background-image: url(../img/img.jpg);
 }
 
+.foto2 {
+  background-image: url(../img/img4.jpg);
+}
+
+.foto3 {
+  background-image: url(../img/img3.jpg);
+}
+
 body {
   font-family: "Poppins", sans-serif;
 }
@@ -52,6 +60,7 @@ h1 {
 }
 .card-border:hover {
   transform: scale(1.05);
+  
 }
 .gradiente {
   background: #0ab1ff;
@@ -82,10 +91,16 @@ h1 {
 .section-title {
   font-weight: bold;
   transition: ease-out 0.2s;
+  color: #098ccf;
 }
 .section-title:hover {
   transform: scale(1.05);
+  color: var(--color1);
 }
-.img-section:hover {
+/* .img-section:hover {
   transform: rotate(-10deg);
+<<<<<<< HEAD
 }
+=======
+} */
+>>>>>>> b26c5d54794891d6a24808f5ed6ef141ef770097
