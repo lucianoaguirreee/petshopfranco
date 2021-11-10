@@ -87,7 +87,7 @@ function traerDatos(key){
 let dataStorage = traerDatos('datosGuardados')
 
 function agregarDatos(id){
-  let tablaArticulos = document.getElementById(id)
+  let tablaArticulos = document.querySelector(id)
   dataStorage.forEach((elem) => {
     tablaArticulos.innerHTML += `<tr>
                                     <td class="product__cart__item">
