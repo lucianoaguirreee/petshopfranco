@@ -17,7 +17,7 @@ fetch(endPoint)
                   alt="${elem.nombre}">
               <div class="d-flex flex-column justify-content-evenly">
                   <h5 class="card-title fw-bold text-center pt-3 nombre">${elem.nombre}</h5>
-                  <p class="card-text text-center precio fw-bold">$ 5000</p>
+                  <p class="card-text text-center precio fw-bold">$ ${elem.precio}</p>
                   <div class="text-center pb-3">
                       <label for="price" class="cantidad">Cantidad: </label>
                       <input id="cantidad-${elem._id}" class="text-center" type="number" name="cantidad-id"
