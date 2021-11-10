@@ -13,6 +13,7 @@ fetch(endPoint)
           id: elem._id,
           nombre: elem.nombre,
           precio: elem.precio,
+          imagen: elem.imagen
         }
         return procesado
     })
@@ -46,29 +47,30 @@ function guardaDatos(id) {
   let arrayData = []
   let nombre_producto
   let precio_producto
+  let nombre_imagen
   arregloProductos.forEach(elem => {
     if(elem.id === id){
       nombre_producto = elem.nombre
       precio_producto = elem.precio
+      nombre_imagen = elem.imagen
     }
   })
   let str = 'cantidad-'+id
   let data = [{
         cantidad: document.getElementById(str).value,
         nombre: nombre_producto,
-        precio: precio_producto
+        precio: precio_producto,
+        imagen: nombre_imagen
       }]
       let datosGuardados = localStorage.getItem('datosGuardados')
       if(datosGuardados === null){
-        localStorage.setItem('datosGuardados', JSON.stringify(data));
+        localStorage.setItem('datosGuardados', JSON.stringify(data))
       }else{
-        // let newData = []
-        let newData= JSON.parse(datosGuardados)
-        newData.push(data)
-        guardaLocalStorage(newData) 
+        let newData = JSON.parse(datosGuardados)
+        newData.forEach(elem => data.push(elem))
+        localStorage.setItem('datosGuardados', JSON.stringify(data))
       }
 }
-
 cardElement.addEventListener("click", agregarAlCarrito);
 
 function agregarAlCarrito(e) {
@@ -77,6 +79,38 @@ function agregarAlCarrito(e) {
   }
 }
 
-function guardaLocalStorage(key){
-  localStorage.setItem('datosGuardados', JSON.stringify(key));
+function traerDatos(key){
+  let datos = localStorage.getItem(key)
+  return JSON.parse(datos)
 }
+
+let dataStorage = traerDatos('datosGuardados')
+
+function agregarDatos(id){
+  let tablaArticulos = document.getElementById(id)
+  dataStorage.forEach((elem) => {
+    tablaArticulos.innerHTML += `<tr>
+                                    <td class="product__cart__item">
+                                        <div class="product__cart__item__pic">
+                                            <img class="shopping__cart__table-img" src="${elem.imagen}">
+                                        </div>
+                                        <div class="product__cart__item__text">
+                                            <h6>${elem.nombre}</h6>
+                                            <h5 id="id">$ 000</h5>
+                                        </div>
+                                    </td>
+                                    <td class="quantity__item">
+                                        <div class="quantity">
+                                            <div class="pro-qty-2">
+                                                <input type="text" value="1" readonly>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td id="ccu-total" class="cart__price">$ ${elem.precio}</td>
+                                  </tr>`
+  })
+}
+
+agregarDatos('#tabla_articulos')
+
+
