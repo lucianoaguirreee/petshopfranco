@@ -17,8 +17,8 @@
   <body>
     <nav class="sticky-top navbar navbar-expand-lg navbar-dark bg-custom">
       <div class="container-fluid d-flex align-items-center">
-        <img src="./assets/img/logo.png" width="50" alt="" class="me-3" />
-        <a class="navbar-brand" href="#">Franco PetShop</a>
+        <img src="./assets/img/logo.png" width="50" alt="Logo" class="me-3" />
+        <a class="navbar-brand" href="./index.html">Franco PetShop</a>
         <button
           class="navbar-toggler"
           type="button"
@@ -33,7 +33,7 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <ul class="navbar-nav me-auto mb-2 mb-lg-0">
             <li class="nav-item">
-              <a class="nav-link active" aria-current="page" href="#">Home</a>
+              <a class="nav-link active" aria-current="page" href="./index.html">Home</a>
             </li>
 
                     <li class="nav-item dropdown">
@@ -42,8 +42,8 @@
                             Shop
                         </a>
                         <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <li><a class="dropdown-item" href="#">Juguetes</a></li>
-                            <li><a class="dropdown-item" href="#">Farmacia</a></li>
+                            <li><a class="dropdown-item" href="./juguetes.html">Juguetes</a></li>
+                            <li><a class="dropdown-item" href="./farmacia.html">Farmacia</a></li>
                         </ul>
                     </li>
                     <li class="nav-item">
@@ -54,17 +54,14 @@
         </div>
       </div>
     </nav>
-    <header class="">
-      <img src="./assets/img/hero_1.png" width="100%" alt="" />
+    <headers>
+      <img src="./assets/img/hero_1.png" alt="Fotos" class="img-fluid"/>
 
       <div>
         <div class="container">
-          <div class="row">
-            <h2 class="pb-3 pt-3 titulo">Qué estás buscando?</h2>
-          </div>
-          <div class="row pb-4">
+          <div class="row pb-5">
             <div class="col section-title">
-              <a href="#" class="h4 text-decoration-none section-title">
+              <a href="./juguetes.html" class="h4 text-decoration-none section-title">
                 <div class="p-3 d-flex flex-column align-items-center">
                   <img
                     src="./assets/img/juguetes2.png"
@@ -106,8 +103,8 @@
         </div>
       </div>
 
-      <div class="position-relative overflow-hidden text-center">
-        <div class="col-md-5 p-lg-5 mx-auto my-5">
+      <div class="text-center">
+        <div class="p-5">
           <h1 class="fs-1">
             <span class="nombre ps-3">Franco</span>
             <span class="pet">PetShop</span>
@@ -115,10 +112,10 @@
           <p class="lead fw-normal pet fw-bold">Tu PetShop de confianza.</p>
           <a class="btn btn-outline-dark" href="#">Shop</a>
         </div>
-        <div class="product-device shadow-sm d-none d-md-block"></div>
-        <div
+        <!-- <div class=""></div> -->
+        <!-- <div
           class="product-device product-device-2 shadow-sm d-none d-md-block"
-        ></div>
+        ></div> -->
       </div>
     </header>
     <main>
@@ -128,7 +125,7 @@
         <hr class="featurette-divider" />
 
         <div class="row featurette">
-          <div class="col-md-7 d-flex row align-items-center">
+          <div class="col-md-7 d-flex align-items-center">
             <div class="d-flex row align-items-center justify-content-center">
               <h2 class="featurette-heading">
                 First featurette heading.
@@ -141,32 +138,26 @@
             </div>
           </div>
           <div class="col-md-5">
-            <div class="foto foto1"></div>
+            <div class="foto foto1 img-fluid"></div>
           </div>
         </div>
 
         <hr class="featurette-divider" />
 
         <div class="row featurette">
-          <div
-            class="
-              col-md-7
-              order-md-2
-              row
-              align-items-center
-              justify-content-center
-            "
-          >
-            <div class="d-flex row align-items-center justify-content-center">
-              <h2 class="featurette-heading">
+          <div class="col-md-7 order-md-3 row align-items-center justify-content-center">
+            <div class="d-flex row justify-content-between">
+                <h2 class="featurette-heading">
                 Oh yeah, it’s that good.
                 <span class="text-muted">See for yourself.</span>
               </h2>
+             
               <p class="lead">
                 Another featurette? Of course. More placeholder content here to
                 give you an idea of how this layout would work with some actual
                 real-world content in place.
               </p>
+             
             </div>
           </div>
           <div class="col-md-5 order-md-1">
@@ -198,36 +189,16 @@
     <footer class="mt-3">
       <div>
         <div
-          class="
-            d-flex
-            flex-wrap
-            justify-content-between
-            align-items-center
-            py-3
-            bg-custom
-          "
-        >
-          <p class="ps-5 col-md-4 mb-0 text-white">
+          class="d-flex justify-content-between align-items-center p-3 bg-custom">
+          <p class="d-none d-sm-block ps-5 col-md-4 mb-0 text-white">
             &copy; 2021 | Grupo 5 Inc.
           </p>
 
-          <a
-            href="/"
-            class="
-              col-md-4
-              d-flex
-              align-items-center
-              justify-content-center
-              mb-3 mb-md-0
-              me-md-auto
-              link-dark
-              text-decoration-none
-            "
-          >
+          <a href="index.html">
             <img src="./assets/img/logo.png" width="50" alt="" />
           </a>
 
-                <ul class="nav col-md-4 justify-content-end pe-5">
+                <ul class="nav col-md-4 justify-content-end">
                     <li class="nav-item"><a href="#" class="nav-link px-2 text-white">Home</a></li>
                     <li class="nav-item"><a href="#" class="nav-link px-2 text-white">Juguetes</a></li>
                     <li class="nav-item"><a href="#" class="nav-link px-2 text-white">Farmacia</a></li>
