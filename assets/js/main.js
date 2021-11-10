@@ -1,9 +1,9 @@
-let dataTipos = [];
-let tipo = document.querySelector(".farmacia") ? "Medicamento" : "Juguete";
-let endPoint = `https://apipetshop.herokuapp.com/api/articulos`;
+let dataTipos = []
+let tipo = document.querySelector(".farmacia") ? "Medicamento" : "Juguete"
+let endPoint = `https://apipetshop.herokuapp.com/api/articulos`
 
 let arregloProductos = [];
-let cardElement = document.querySelector("#container-productos");
+let cardElement = document.querySelector("#container-productos")
 fetch(endPoint)
   .then((res) => res.json())
   .then((data) => {
@@ -15,7 +15,7 @@ fetch(endPoint)
         precio: elem.precio,
         imagen: elem.imagen,
       };
-      return procesado;
+      return procesado
     });
 
     if (document.title === 'PetShop | Juguetes' || document.title === 'PetShop | Farmacia') {
@@ -41,36 +41,34 @@ fetch(endPoint)
             </div>
         </div>`;
         }
-      });
+      })
     }
   })
-  .catch((err) => console.error(err));
+  .catch((err) => console.error(err))
 
 function guardaDatos(id) {
-  let arrayData = [];
-  let nombre_producto;
-  let precio_producto;
-  let nombre_imagen;
+  let nombre_producto
+  let precio_producto
+  let nombre_imagen
   arregloProductos.forEach((elem) => {
     if (elem.id === id) {
-      nombre_producto = elem.nombre;
-      precio_producto = elem.precio;
-      nombre_imagen = elem.imagen;
+      nombre_producto = elem.nombre
+      precio_producto = elem.precio
+      nombre_imagen = elem.imagen
     }
   });
-  let str = "cantidad-" + id;
-  let data = [
+    let data = [
     {
       id,
-      cantidad: parseInt(document.getElementById(str).value),
+      cantidad: parseInt(document.getElementById("cantidad-"+id).value),
       nombre: nombre_producto,
       precio: precio_producto,
       imagen: nombre_imagen,
     },
-  ];
-  let datosGuardados = localStorage.getItem("datosGuardados");
+  ]
+  let datosGuardados = localStorage.getItem("datosGuardados")
   if (datosGuardados === null) {
-    localStorage.setItem("datosGuardados", JSON.stringify(data));
+    localStorage.setItem("datosGuardados", JSON.stringify(data))
   } else {
     let newData = JSON.parse(datosGuardados)
     let yaEsta = false
@@ -87,32 +85,34 @@ function guardaDatos(id) {
     }else{
       newData.forEach((elem) => data.push(elem))
     } 
-    localStorage.setItem("datosGuardados", JSON.stringify(data));
+    localStorage.setItem("datosGuardados", JSON.stringify(data))
   }
 }
 
 if (document.title != "PetShop | Carrito") {
-  cardElement.addEventListener("click", agregarAlCarrito);
+  cardElement.addEventListener("click", agregarAlCarrito)
 }
 
 function agregarAlCarrito(e) {
   if (e.target.classList.contains("boton-comprar")) {
-    guardaDatos(e.target.id);
+    guardaDatos(e.target.id)
   }
 }
 
 function traerDatos(key) {
   let datos = localStorage.getItem(key);
-  return JSON.parse(datos);
+  return JSON.parse(datos)
 }
 
-let dataStorage = traerDatos("datosGuardados");
-// console.log(dataStorage)
+let dataStorage = traerDatos("datosGuardados")
 function agregarDatos(id) {
-  let tablaArticulos = document.querySelector(`#${id}`);
+  let tablaArticulos = document.querySelector(`#${id}`)
   dataStorage.forEach((elem) => {
     tablaArticulos.innerHTML += `<tr>
                                     <td class="product__cart__item">
+                                        <div class="product__cart__item__pic">
+                                        <button type="button" id="${elem.id}" class="btn btn-danger eliminar">X</button>
+                                        </div>
                                         <div class="product__cart__item__pic">
                                             <img class="shopping__cart__table-img" src="${elem.imagen}">
                                         </div>
@@ -124,12 +124,31 @@ function agregarDatos(id) {
                                     <td class="quantity__item">
                                         <div class="quantity">
                                             <div class="pro-qty-2">
-                                                <input type="text" value="1" readonly>
-                                            </div>
+                                            <input id="cantidad-${elem._id}" class="text-center" type="number" name="cantidad-id"
+                                            min="1" max="${elem.stock}" step="1" value="${elem.cantidad}">
+                                                            </div>
                                         </div>
                                     </td>
                                     <td id="ccu-total" class="cart__price">$ ${elem.precio}</td>
-                                  </tr>`;
-  });
+                                 </tr>`
+  })
 }
-agregarDatos("tabla_articulos");
+agregarDatos("tabla_articulos")
+
+
+
+let eliminar = document.querySelectorAll('.eliminar')
+eliminar.addEventListener("click", eliminaArticulo)
+console.log(dataStorage)
+function eliminaArticulo(){
+ console.log('click')
+  // let index = dataStorage.findIndex(el=> el.id == e.target.id)
+  // dataStorage.splice(index, 1)
+  // console.log(index)
+  // console.log(e.target.id)
+  // let r = dataStorage.indexOf(e.target.id)
+  // console.log(r)
+}
+
+
+
