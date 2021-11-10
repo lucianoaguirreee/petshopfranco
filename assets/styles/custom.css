@@ -107,13 +107,7 @@ h1 {
 }
 /* .img-section:hover {
   transform: rotate(-10deg);
-<<<<<<< HEAD
-}
-=======
 } */
-<<<<<<< HEAD
->>>>>>> b26c5d54794891d6a24808f5ed6ef141ef770097
-=======
 
 .precio {
   color: var(--color2);
@@ -285,9 +279,6 @@ h1 {
   background: #111111;
   border-color: #111111;
 }
-<<<<<<< HEAD
->>>>>>> 0cfbe01bfc76f8792099033a678ffffc099d6ff3
-=======
 
 .continue__btn.update__btn a i {
   margin-right: 5px;
@@ -410,4 +401,3 @@ ul {
 textarea {
   max-height: 150px;
 }
->>>>>>> 8340a4e7a8126ce266dd5623f45633c89ab65b5e
