@@ -1,7 +1,7 @@
 let dataTipos = []
 let tipo = document.querySelector(".farmacia") ? "Medicamento" : "Juguete"
 let endPoint = `https://apipetshop.herokuapp.com/api/articulos`
-let carritoNumero = document.querySelector('#count')
+let carritoNumero = document.querySelector('#cantidad-carrito')
 let arregloProductos = [];
 let cardElement = document.querySelector("#container-productos")
 fetch(endPoint)
@@ -90,17 +90,12 @@ function guardaDatos(id) {
 }
 
 if (document.title != "PetShop | Carrito") {
-  cardElement.addEventListener("click", agregarAlCarrito, count)
+  cardElement.addEventListener("click", agregarAlCarrito)
 }
 
 function agregarAlCarrito(e) {
   if (e.target.classList.contains("boton-comprar")) {
     guardaDatos(e.target.id)
-
-    let contador;
-    contador = contar()
-    console.log(contador)
-
   }
 
 
@@ -111,7 +106,7 @@ function traerDatos(key) {
   return JSON.parse(datos)
 }
 
-let dataStorage = traerDatos("datosGuardados")
+let dataStorage = traerDatos("datosGuardados") || []
 
 function agregarDatos(id) {
   let tablaArticulos = document.querySelector(`#${id}`)
@@ -168,6 +163,10 @@ if (document.title === 'PetShop | Carrito') {
     tabla_articulos = ""
 
   })
+
+  // contar()
+
+  imprimirCantidad()
 }
 
 function eliminarArticulos(e) {
@@ -192,32 +191,33 @@ function eliminarArticulos(e) {
 
 // }
 
-function count() {
-  if (dataStorage != 0) {
-    carritoNumero.innerText = dataStorage.length
-  } else {
-    carritoNumero.innerText = '0'
-  }
-}
-
-
-
-if (dataStorage === null || dataStorage.length >=0) {
-  console.log('no hay nada');
-} else {
-  contar()
-}
-
 
 function contar() {
-  console.log('agregando');
-  let contador;
+  let total = 0
+  let datos = localStorage.getItem("datosGuardados")
+  if (datos) {
+    let data = JSON.parse(datos)
+    data.forEach((elem) => {
+      total += parseInt(elem.precio) * parseInt(elem.cantidad)
+    })
+  }
+  // let cantidadDOM = document.querySelector('#cantidad').innerText 
+  // cantidadDOM = cantidad
+  let totalDOM = document.querySelector('#total')
+  totalDOM.innerText = `$ ${total}`
+}
 
-  dataStorage.forEach(producto => {
-    contador = producto.cantidad++
-    // console.log(producto.cantidad );
-    // carritoNumero.innerText = dataStorage.length
-  });
+// imprimir la cantidad de elementos en el carrito en la id "cantidad-carrito"
 
-  return contador
+function imprimirCantidad() {
+  let datos = localStorage.getItem("datosGuardados")
+  let cantidad = 0
+  if (datos) {
+    let data = JSON.parse(datos)
+    data.forEach((elem) => {
+      cantidad += parseInt(elem.cantidad)
+    })
+  }
+  let cantidadDOM = document.querySelector('#cantidad-carrito')
+  cantidadDOM.innerText = cantidad
 }
