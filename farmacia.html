@@ -11,6 +11,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&display=swap" rel="stylesheet">
     <link rel="shortcut icon" href="./assets/img/logo.ico" type="image/x-icon">
+    <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css">
     <title>PetShop | Farmacia</title>
 </head>
 
@@ -49,8 +50,13 @@
                 </ul>
             </div>
         </div>
-        <div class="pe-5 d-sm-none  d-md-block">
-            <a href="./carrito.html"><i class="uil uil-shopping-cart cart fs-1 text-white"></i></a>
+        <div class="pe-5 my-3">
+            <a type="button" href="./carrito.html" class="btn position-relative bg-white-custom bg-naranja">
+                <i class="uil uil-shopping-cart fs-2 text-azul"></i>
+                <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger fs-6">
+                    <span id="cantidad-carrito">0</span>
+                </span>
+            </a>
         </div>
     </nav>
     <header class="">
@@ -61,46 +67,6 @@
 
         <div class="container d-flex flex-wrap mt-5 farmacia" id="container-productos">
 
-            <!-- <div class="col-4 p-2"> 
-                <div class="card w-100 p-6 d-flex align-items-center card-border border-2 card-size">
-                    <img class="lazyloaded img-producto"
-                        src="//cdn.shopify.com/s/files/1/0453/4181/products/gaucho_goods_tribal_leather_dog_collar_1_280x280_crop_top.jpg?v=1625752646"
-                        alt="Gaucho Goods Tribal Leather Dog Collar">
-                    <div class="d-flex flex-column justify-content-evenly">
-                        <h5 class="card-title fw-bold text-center pt-3 nombre">Producto 2</h5>
-                        <p class="card-text text-center precio fw-bold">$ 5000</p>
-                        <div class="text-center pb-3">
-                            <label for="price" class="cantidad">Cantidad: </label>
-                            <input id="cantidad-id-prod-002" class="text-center" type="number" name="cantidad-id"
-                                min="1" max="10" step="1" value="1">
-                        </div>
-                        <a id="prod-002" onClick="reply_click(this.id)"
-                            class="  boton-comprar btn btn-primary bg-custom mb-3">Agregar
-                            al carrito</a>
-                    </div>
-                </div>
-            </div> -->
-
-
-            <!-- <div class="col-4 p-2">
-                <div
-                    class="card w-100 p-6 d-flex align-items-center justify-content-evenly card-border border-2 card-size text-center">
-                    <img class="lazyloaded img-producto" src="./assets/img/product_img.jpeg"
-                        alt="Gaucho Goods Tribal Leather Dog Collar">
-                    <div class="d-flex flex-column justify-content-evenly">
-                        <h5 class="card-title fw-bold text-center pt-3 nombre">${elem.nombre}</h5>
-                        <p class="card-text text-center precio fw-bold">$ 5000</p>
-                        <div class="text-center pb-3">
-                            <label for="price" class="cantidad">Cantidad: </label>
-                            <input id="cantidad-${elem._id}" class="text-center" type="number" name="cantidad-id"
-                                min="1" max="${elem.stock}" step="1" value="1">
-                        </div>
-                        <div>
-                            <a id="${elem._id}" class="boton-comprar btn btn-primary bg-custom mb-3">Agregar al carrito</a>
-                        </div>
-                    </div>
-                </div>
-            </div>` -->
         </div>
 
 
