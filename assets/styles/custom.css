@@ -404,3 +404,14 @@ ul {
 textarea {
   max-height: 150px;
 }
+
+.form-error:focus{
+    outline: none;
+    border: 3px solid red;
+}
+
+.form-correct:focus{
+  outline: none;
+  border: 3px solid green;
+}
+
