@@ -20,24 +20,51 @@ fetch(endPoint)
       return procesado
     });
 
-    if (document.title === 'PetShop | Juguetes' || document.title === 'PetShop | Farmacia') {
-      dataTipos.forEach((elem) => {
-        if (elem.tipo == tipo) {
-          cardElement.innerHTML += `<div class="col-4 p-2">
-            <div class="card w-100 p-6 d-flex align-items-center justify-content-evenly flex-column card-border border-2 card-size">
-                <img class="lazyloaded img-producto"
-                    src="${elem.imagen}"
-                    alt="${elem.nombre}">
-                <div class="d-flex flex-column justify-content-evenly">
-                    <h5 class="card-title fw-bold text-center pt-3 nombre">${elem.nombre}</h5>
-                    <p class="card-text text-center precio fw-bold">$ ${elem.precio}</p>
-                    <div class="text-center pb-3">
-                        <label for="price" class="cantidad">Cantidad: </label>
-                        <input id="cantidad-${elem._id}" class="text-center" type="number" name="cantidad-id"
-                            min="1" max="${elem.stock}" step="1" value="1">
+      if (document.title === 'PetShop | Juguetes' || document.title === 'PetShop | Farmacia') {
+        console.log("===dataTipos==")
+        console.log(dataTipos)
+        console.log("===arregloProductos==")
+        console.log(arregloProductos)
+        console.log("=====")
+        arregloProductos.forEach((elem) => {
+          if (elem.tipo == tipo) {
+            
+            if (elem.stock === 0) {
+              cardElement.innerHTML += `<div class="col-4 p-2">
+                <div class="card w-100 p-6 d-flex align-items-center justify-content-evenly flex-column card-border border-2 card-size">
+                    <img class="lazyloaded img-producto"
+                        src="${elem.imagen}"
+                        alt="${elem.nombre}">
+                    <div class="d-flex flex-column justify-content-evenly">
+                        <h5 class="card-title fw-bold text-center pt-3 nombre">${elem.nombre}</h5>
+                        <p class="card-text text-center precio fw-bold">$ ${elem.precio}</p>
+                        <div id="div-cantidad-${elem._id}" class="text-center pb-3">
+                          <label for="price" class="cantidad">Cantidad: </label>
+                          <label id="label-${elem._id}">SIN STOCK </label>
+                        </div>
+                        <div class="d-flex align-items-center justify-content-center">
+                        <button id="${elem._id}" class="boton-comprar btn btn-primary bg-custom mb-3" disabled>Agregar al carrito</button>
+                        </div>
                     </div>
-                    <div class="d-flex align-items-center justify-content-center">
-                      <a id="${elem._id}" class="boton-comprar btn btn-primary bg-custom mb-3">Agregar al carrito</a>
+                </div>
+              </div>`;
+            } else {
+              cardElement.innerHTML += `<div class="col-4 p-2">
+                <div class="card w-100 p-6 d-flex align-items-center justify-content-evenly flex-column card-border border-2 card-size">
+                    <img class="lazyloaded img-producto"
+                        src="${elem.imagen}"
+                        alt="${elem.nombre}">
+                    <div class="d-flex flex-column justify-content-evenly">
+                        <h5 class="card-title fw-bold text-center pt-3 nombre">${elem.nombre}</h5>
+                        <p class="card-text text-center precio fw-bold">$ ${elem.precio}</p>
+                        <div id="div-cantidad-${elem._id}" class="text-center pb-3">
+                            <label for="price" class="cantidad">Cantidad: </label>
+                            <input id="cantidad-${elem._id}" class="text-center" type="number" name="cantidad-id"
+                                min="0" max="${elem.stock}" step="1" value="1">
+                        </div>
+                        <div class="d-flex align-items-center justify-content-center">
+                          <button id="${elem._id}" class="boton-comprar btn btn-primary bg-custom mb-3">Agregar al carrito</button>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -97,8 +124,31 @@ if (document.title != "PetShop | Carrito") {
 
 function agregarAlCarrito(e) {
   if (e.target.classList.contains("boton-comprar")) {
-    guardaDatos(e.target.id)
-    datosTotales(dataStorage)
+    
+    if (document.getElementById("cantidad-"+e.target.id))
+    {
+        guardaDatos(e.target.id);
+
+        //Descuenta cantidad al max value
+        let divCantidadId = "div-cantidad-"+e.target.id
+        console.log(divCantidadId)
+        let divCantidadProd = document.getElementById(divCantidadId)
+        
+        if (varStockGlobal === 0) {
+          divCantidadProd.innerHTML = `
+          <label for="price" class="cantidad">Cantidad: </label>
+          <label id="label-${e.target.id}">SIN STOCK </label>
+              `;
+          document.getElementById(e.target.id).disabled = true;
+        } else {
+          divCantidadProd.innerHTML = `
+          <label for="price" class="cantidad">Cantidad: </label>
+          <input id="cantidad-${e.target.id}" class="text-center" type="number" name="cantidad-id"
+              min="0" max="${varStockGlobal}" step="1" value="0">
+              `;
+          document.getElementById(e.target.id).disabled = false;
+        }
+    }
   }
 }
 
