@@ -160,8 +160,8 @@ if (document.title != "PetShop | Carrito") {
 function agregarAlCarrito(e) {
   if (e.target.classList.contains("boton-comprar")) {
     
-    if (document.getElementById("cantidad-"+e.target.id))
-    {
+    if (document.getElementById("cantidad-"+e.target.id)) {
+
         guardaDatos(e.target.id);
 
         //Descuenta cantidad al max value
@@ -183,10 +183,10 @@ function agregarAlCarrito(e) {
               `;
           document.getElementById(e.target.id).disabled = false;
         }
+        guardaDatos(e.target.id)
+        datosTotales(dataStorage)
+        imprimirCantidad()
     }
-    guardaDatos(e.target.id)
-    datosTotales(dataStorage)
-    imprimirCantidad()
   }
 
 
@@ -197,42 +197,8 @@ function traerDatos(key) {
   return JSON.parse(datos)
 }
 
-let dataStorage = traerDatos("datosGuardados")
 let cantidadTotal
 let dataStorage = traerDatos("datosGuardados") || []
-
-function agregarDatos(id) {
-  let tablaArticulos = document.querySelector(`#${id}`)
-  if (tablaArticulos) {
-    dataStorage.forEach((elem) => {
-      tablaArticulos.innerHTML += `<tr>
-                                      <td class="product__cart__item">
-                                          <div class="product__cart__item__pic">
-                                          <a type="button" id="${elem.id}" class="btn btn-danger eliminar">X</a>
-                                          </div>
-                                          <div class="product__cart__item__pic">
-                                              <img class="shopping__cart__table-img" src="${elem.imagen}">
-                                          </div>
-                                          <div class="product__cart__item__text">
-                                              <h6>${elem.nombre}</h6>
-                                              <h5 id="id">$ ${elem.precio}</h5>
-                                          </div>
-                                      </td>
-                                      <td class="quantity__item">
-                                          <div class="quantity">
-                                              <div class="pro-qty-2">
-                                              <input id="cantidad-${elem._id}" class="text-center" type="number" name="cantidad-id"
-                                              min="1" max="${elem.stock}" step="1" value="${elem.cantidad}">
-                                                              </div>
-                                          </div>
-                                      </td>
-                                      <td id="ccu-total" class="cart__price">$ ${elem.precio}</td>
-                                   </tr>`
-    })
-  }
-
-}
-agregarDatos("tabla_articulos")
 
 function imprimirDatos(array, id) {
   let tablaArticulos = document.querySelector(`#${id} tbody`)
@@ -266,15 +232,15 @@ function imprimirDatos(array, id) {
                                      </tr>`
    })
   }else{
-    tablaArticulos.innerHTML = `<h2>No existen articulos en el carrito....</h2>`
+    let div = document.querySelector('#alerta')
+    div.innerHTML = `<div class="alert alert-info text-center" role="alert">
+    No agregaste nada al carrito ...
+  </div>`
   }
+  imprimirCantidad()
 }
-imprimirDatos(dataStorage,"tabla_articulos")
 
 let tabla_articulos = document.querySelector('#tabla_articulos')
-tabla_articulos.addEventListener('click', eliminarArticulos)
-
-
 
 if (document.title === 'PetShop | Carrito') {
   tabla_articulos.addEventListener('click', eliminarArticulos)
@@ -294,6 +260,23 @@ if (document.title === 'PetShop | Carrito') {
 
   // contar()
 
+  imprimirDatos(dataStorage,"tabla_articulos")
+
+  datosTotales(dataStorage)
+
+  botonCupon.addEventListener('click', e => {
+    e.preventDefault()
+    if(arrayCupon.includes(inputCupon.value)){
+      envio = 500
+      // console.log(cantidadTotal)
+      total.innerText = `$ ${(cantidadTotal + 500)}` 
+      costoEnvio.innerText = `$ ${envio}`
+      codigoCupon.innerText =  `$ ${envio}`
+    }else{
+  
+    }
+  })
+
   imprimirCantidad()
 }
 
@@ -305,6 +288,7 @@ function eliminarArticulos(e) {
     imprimirDatos(dataStorage, "tabla_articulos")
     // spam.innerText = ""    
     datosTotales(dataStorage)
+    imprimirCantidad()
   }
 
 }
@@ -324,6 +308,7 @@ function datosTotales(){
   let codigoCupon = document.querySelector('#codigoCupon')
   let total = document.querySelector('#total')
   let envio = 1000
+
     if(cantidadTotal != 0){
     spam.innerText = `$ ${cantidadTotal}`
     costoEnvio.innerText = `$ ${envio}`
@@ -336,25 +321,15 @@ function datosTotales(){
     spam.innerText = `$ ${cantidadTotal}`
   }
 }
-datosTotales(dataStorage)
+
+
 
 let arrayCupon = ['franco', 'grupo5', 'mindhub']
 
 let inputCupon = document.querySelector('#cupon')
 let botonCupon = document.querySelector('.btn-cupon')
 
-botonCupon.addEventListener('click', e => {
-  e.preventDefault()
-  if(arrayCupon.includes(inputCupon.value)){
-    envio = 500
-    // console.log(cantidadTotal)
-    total.innerText = `$ ${(cantidadTotal + 500)}` 
-    costoEnvio.innerText = `$ ${envio}`
-    codigoCupon.innerText =  `$ ${envio}`
-  }else{
 
-  }
-})
 
 function imprimirCantidad() {
   let datos = localStorage.getItem("datosGuardados")
