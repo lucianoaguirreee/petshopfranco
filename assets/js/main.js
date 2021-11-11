@@ -10,6 +10,7 @@ fetch(endPoint)
   .then((res) => res.json())
   .then((data) => {
     dataTipos = data.response
+
     arregloProductos = dataTipos.map((elem) => {
       let procesado = {
         id: elem._id,
@@ -20,17 +21,17 @@ fetch(endPoint)
       return procesado
     });
 
-      if (document.title === 'PetShop | Juguetes' || document.title === 'PetShop | Farmacia') {
-        console.log("===dataTipos==")
-        console.log(dataTipos)
-        console.log("===arregloProductos==")
-        console.log(arregloProductos)
-        console.log("=====")
-        arregloProductos.forEach((elem) => {
-          if (elem.tipo == tipo) {
-            
-            if (elem.stock === 0) {
-              cardElement.innerHTML += `<div class="col-4 p-2">
+    if (document.title === 'PetShop | Juguetes' || document.title === 'PetShop | Farmacia') {
+      console.log("===dataTipos==")
+      console.log(dataTipos)
+      console.log("===arregloProductos==")
+      console.log(arregloProductos)
+      console.log("=====")
+      arregloProductos.forEach((elem) => {
+        if (elem.tipo == tipo) {
+
+          if (elem.stock === 0) {
+            cardElement.innerHTML += `<div class="col-4 p-2">
                 <div class="card w-100 p-6 d-flex align-items-center justify-content-evenly flex-column card-border border-2 card-size">
                     <img class="lazyloaded img-producto"
                         src="${elem.imagen}"
@@ -48,8 +49,8 @@ fetch(endPoint)
                     </div>
                 </div>
               </div>`;
-            } else {
-              cardElement.innerHTML += `<div class="col-4 p-2">
+          } else {
+            cardElement.innerHTML += `<div class="col-4 p-2">
                 <div class="card w-100 p-6 d-flex align-items-center justify-content-evenly flex-column card-border border-2 card-size">
                     <img class="lazyloaded img-producto"
                         src="${elem.imagen}"
@@ -69,10 +70,13 @@ fetch(endPoint)
                 </div>
             </div>
         </div>`;
+          }
         }
-      })
+      }
+      )
     }
   })
+
   .catch((err) => console.error(err))
 
 function guardaDatos(id) {
@@ -80,40 +84,40 @@ function guardaDatos(id) {
   let precio_producto
   let nombre_imagen
   arregloProductos.forEach((elem) => {
-    if(elem.id === id) {
-       nombre_producto = elem.nombre
-       precio_producto = elem.precio
-       nombre_imagen = elem.imagen
+    if (elem.id === id) {
+      nombre_producto = elem.nombre
+      precio_producto = elem.precio
+      nombre_imagen = elem.imagen
     }
   })
-    let data = [
+  let data = [
     {
       id,
-      cantidad: parseInt(document.getElementById("cantidad-"+id).value),
+      cantidad: parseInt(document.getElementById("cantidad-" + id).value),
       nombre: nombre_producto,
       precio: precio_producto,
       imagen: nombre_imagen,
     },
   ]
   let datosGuardados = localStorage.getItem("datosGuardados")
-  if(datosGuardados === null){
+  if (datosGuardados === null) {
     localStorage.setItem("datosGuardados", JSON.stringify(data))
-  }else{
+  } else {
     let newData = JSON.parse(datosGuardados)
     let yaEsta = false
     newData.forEach(elem => {
       elem.cantidad = parseInt(elem.cantidad)
-      if(elem.id === data[0].id){
+      if (elem.id === data[0].id) {
         yaEsta = true
-        elem.cantidad += data[0].cantidad 
+        elem.cantidad += data[0].cantidad
       }
 
     })
-    if(yaEsta){
+    if (yaEsta) {
       data = newData
-    }else{
+    } else {
       newData.forEach((elem) => data.push(elem))
-    } 
+    }
     localStorage.setItem("datosGuardados", JSON.stringify(data))
   }
 }
@@ -124,30 +128,29 @@ if (document.title != "PetShop | Carrito") {
 
 function agregarAlCarrito(e) {
   if (e.target.classList.contains("boton-comprar")) {
-    
-    if (document.getElementById("cantidad-"+e.target.id))
-    {
-        guardaDatos(e.target.id);
 
-        //Descuenta cantidad al max value
-        let divCantidadId = "div-cantidad-"+e.target.id
-        console.log(divCantidadId)
-        let divCantidadProd = document.getElementById(divCantidadId)
-        
-        if (varStockGlobal === 0) {
-          divCantidadProd.innerHTML = `
+    if (document.getElementById("cantidad-" + e.target.id)) {
+      guardaDatos(e.target.id);
+
+      //Descuenta cantidad al max value
+      let divCantidadId = "div-cantidad-" + e.target.id
+      console.log(divCantidadId)
+      let divCantidadProd = document.getElementById(divCantidadId)
+
+      if (varStockGlobal === 0) {
+        divCantidadProd.innerHTML = `
           <label for="price" class="cantidad">Cantidad: </label>
           <label id="label-${e.target.id}">SIN STOCK </label>
               `;
-          document.getElementById(e.target.id).disabled = true;
-        } else {
-          divCantidadProd.innerHTML = `
+        document.getElementById(e.target.id).disabled = true;
+      } else {
+        divCantidadProd.innerHTML = `
           <label for="price" class="cantidad">Cantidad: </label>
           <input id="cantidad-${e.target.id}" class="text-center" type="number" name="cantidad-id"
               min="0" max="${varStockGlobal}" step="1" value="0">
               `;
-          document.getElementById(e.target.id).disabled = false;
-        }
+        document.getElementById(e.target.id).disabled = false;
+      }
     }
   }
 }
@@ -162,10 +165,14 @@ let cantidadTotal
 
 function imprimirDatos(array, id) {
   let tablaArticulos = document.querySelector(`#${id}`)
+
+  if (tablaArticulos) {
+
   tablaArticulos.innerHTML = " "
-  if(array.length != 0){
+
+  if (array.length != 0) {
     array.forEach((elem) => {
-     tablaArticulos.innerHTML += `<tr>
+      tablaArticulos.innerHTML += `<tr>
                                      <td class="product__cart__item">
                                          <div class="product__cart__item__pic">
                                          <a type="button" id="${elem.id}" class="btn btn-danger eliminar">X</a>
@@ -188,35 +195,42 @@ function imprimirDatos(array, id) {
                                      </td>
                                      <td id="ccu-total" class="cart__price">$ ${elem.precio}</td>
                                   </tr>`
-   })
-  }else{
-    tablaArticulos.innerHTML = `<h2>No existen articulos en el carrito....</h2>`
+    })
+  }
+  
+  } else {
+    if (tablaArticulos) {
+      tablaArticulos.innerHTML = `<h2>No existen articulos en el carrito....</h2>`
+    }
   }
 }
-imprimirDatos(dataStorage,"tabla_articulos")
+imprimirDatos(dataStorage, "tabla_articulos")
 
 let tabla_articulos = document.querySelector('#tabla_articulos')
-tabla_articulos.addEventListener('click', eliminarArticulos)
+
+if (tabla_articulos) {
+  tabla_articulos.addEventListener('click', eliminarArticulos)
+}
 
 function eliminarArticulos(e) {
   if (e.target.classList.contains("eliminar")) {
-    let index = dataStorage.findIndex(el=> el.id == e.target.id)
+    let index = dataStorage.findIndex(el => el.id == e.target.id)
     dataStorage.splice(index, 1)
     localStorage.setItem("datosGuardados", JSON.stringify(dataStorage))
-    imprimirDatos(dataStorage, "tabla_articulos")    
+    imprimirDatos(dataStorage, "tabla_articulos")
   }
 }
 
-function datosTotales(){
-  let datos = localStorage.getItem("datosGuardados") 
-  let cantidadTotal = 0
-  if(datos){
-    let data = JSON.parse(datos)
-    data.forEach(elem => {
-      cantidadTotal += parseInt(elem.cantidad) * parseInt(elem.precio) 
-    })
-  }
-  let spam = document.querySelector('#total')
-  spam.innerText = cantidadTotal
-}
-datosTotales(dataStorage)
+// function datosTotales() {
+//   let datos = localStorage.getItem("datosGuardados")
+//   let cantidadTotal = 0
+//   if (datos) {
+//     let data = JSON.parse(datos)
+//     data.forEach(elem => {
+//       cantidadTotal += parseInt(elem.cantidad) * parseInt(elem.precio)
+//     })
+//   }
+//   let spam = document.querySelector('#total')
+//   spam.innerText = cantidadTotal
+// }
+// datosTotales(dataStorage)
