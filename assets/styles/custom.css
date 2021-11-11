@@ -36,8 +36,8 @@
 }
 
 .foto {
-  height: 500px;
-  width: 500px;
+  height: 400px;
+  width: 400px;
   background-size: cover;
   background-position: center;
 }
@@ -123,16 +123,8 @@ h1 {
 <<<<<<< HEAD
 <<<<<<< HEAD
 }
-=======
-=======
->>>>>>> f265c3e1cf5bb4ae49aa4d2d5b5206e6ffe16285
-=======
->>>>>>> sula
-} */
-<<<<<<< HEAD
-=======
 
->>>>>>> formini
+} */
 
 .precio {
   color: var(--color2);
