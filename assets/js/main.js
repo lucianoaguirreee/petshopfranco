@@ -1,3 +1,5 @@
+/* Trae los datos de la API */
+
 let dataTipos = []
 let tipo = document.querySelector(".farmacia") ? "Medicamento" : "Juguete"
 let endPoint = `https://apipetshop.herokuapp.com/api/articulos`
@@ -7,7 +9,7 @@ let cardElement = document.querySelector("#container-productos")
 fetch(endPoint)
   .then((res) => res.json())
   .then((data) => {
-    dataTipos = data.response;
+    dataTipos = data.response
     arregloProductos = dataTipos.map((elem) => {
       let procesado = {
         id: elem._id,
@@ -51,12 +53,12 @@ function guardaDatos(id) {
   let precio_producto
   let nombre_imagen
   arregloProductos.forEach((elem) => {
-    if (elem.id === id) {
-      nombre_producto = elem.nombre
-      precio_producto = elem.precio
-      nombre_imagen = elem.imagen
+    if(elem.id === id) {
+       nombre_producto = elem.nombre
+       precio_producto = elem.precio
+       nombre_imagen = elem.imagen
     }
-  });
+  })
     let data = [
     {
       id,
@@ -67,9 +69,9 @@ function guardaDatos(id) {
     },
   ]
   let datosGuardados = localStorage.getItem("datosGuardados")
-  if (datosGuardados === null) {
+  if(datosGuardados === null){
     localStorage.setItem("datosGuardados", JSON.stringify(data))
-  } else {
+  }else{
     let newData = JSON.parse(datosGuardados)
     let yaEsta = false
     newData.forEach(elem => {
@@ -96,6 +98,7 @@ if (document.title != "PetShop | Carrito") {
 function agregarAlCarrito(e) {
   if (e.target.classList.contains("boton-comprar")) {
     guardaDatos(e.target.id)
+    datosTotales(dataStorage)
   }
 }
 
@@ -105,60 +108,66 @@ function traerDatos(key) {
 }
 
 let dataStorage = traerDatos("datosGuardados")
-function agregarDatos(id) {
-  let tablaArticulos = document.querySelector(`#${id}`)
-  dataStorage.forEach((elem) => {
-    tablaArticulos.innerHTML += `<tr>
-                                    <td class="product__cart__item">
-                                        <div class="product__cart__item__pic">
-                                        <a type="button" id="${elem.id}" class="btn btn-danger eliminar">X</a>
-                                        </div>
-                                        <div class="product__cart__item__pic">
-                                            <img class="shopping__cart__table-img" src="${elem.imagen}">
-                                        </div>
-                                        <div class="product__cart__item__text">
-                                            <h6>${elem.nombre}</h6>
-                                            <h5 id="id">$ ${elem.precio}</h5>
-                                        </div>
-                                    </td>
-                                    <td class="quantity__item">
-                                        <div class="quantity">
-                                            <div class="pro-qty-2">
-                                            <input id="cantidad-${elem._id}" class="text-center" type="number" name="cantidad-id"
-                                            min="1" max="${elem.stock}" step="1" value="${elem.cantidad}">
-                                                            </div>
-                                        </div>
-                                    </td>
-                                    <td id="ccu-total" class="cart__price">$ ${elem.precio}</td>
-                                 </tr>`
-  })
-}
-agregarDatos("tabla_articulos")
+let cantidadTotal
 
-console.log(dataStorage)
+function imprimirDatos(array, id) {
+  let tablaArticulos = document.querySelector(`#${id}`)
+  tablaArticulos.innerHTML = " "
+  if(array.length != 0){
+    array.forEach((elem) => {
+     tablaArticulos.innerHTML += `<tr>
+                                     <td class="product__cart__item">
+                                         <div class="product__cart__item__pic">
+                                         <a type="button" id="${elem.id}" class="btn btn-danger eliminar">X</a>
+                                         </div>
+                                         <div class="product__cart__item__pic">
+                                             <img class="shopping__cart__table-img" src="${elem.imagen}">
+                                         </div>
+                                         <div class="product__cart__item__text">
+                                             <h6>${elem.nombre}</h6>
+                                             <h5 id="id">$ ${elem.precio}</h5>
+                                         </div>
+                                     </td>
+                                     <td class="quantity__item">
+                                         <div class="quantity">
+                                             <div class="pro-qty-2">
+                                             <input id="cantidad-${elem._id}" class="text-center" type="number" name="cantidad-id"
+                                             min="1" max="${elem.stock}" step="1" value="${elem.cantidad}">
+                                                             </div>
+                                         </div>
+                                     </td>
+                                     <td id="ccu-total" class="cart__price">$ ${elem.precio}</td>
+                                  </tr>`
+   })
+  }else{
+    tablaArticulos.innerHTML = `<h2>No existen articulos en el carrito....</h2>`
+  }
+}
+imprimirDatos(dataStorage,"tabla_articulos")
 
 let tabla_articulos = document.querySelector('#tabla_articulos')
-
 tabla_articulos.addEventListener('click', eliminarArticulos)
 
 function eliminarArticulos(e) {
   if (e.target.classList.contains("eliminar")) {
-    console.log(e.target)
+    let index = dataStorage.findIndex(el=> el.id == e.target.id)
+    dataStorage.splice(index, 1)
+    localStorage.setItem("datosGuardados", JSON.stringify(dataStorage))
+    imprimirDatos(dataStorage, "tabla_articulos")    
   }
 }
 
-// function eliminaArticulo(e){
+function datosTotales(){
+  let datos = localStorage.getItem("datosGuardados") 
+  let cantidadTotal = 0
+  if(datos){
+    let data = JSON.parse(datos)
+    data.forEach(elem => {
+      cantidadTotal += parseInt(elem.cantidad) * parseInt(elem.precio) 
+    })
+  }
+  let spam = document.querySelector('#total')
+  spam.innerText = cantidadTotal
+}
+datosTotales(dataStorage)
 
-  // console.log(e.target)
-
-  // let index = dataStorage.findIndex(el=> el.id == e.target.id)
-  // dataStorage.splice(index, 1)
-  // console.log(index)
-  // console.log(e.target.id)
-  // let r = dataStorage.indexOf(e.target.id)
-  // console.log(r)
-// }
-
-// function eliminarArticulo(e) {
-  
-// }
