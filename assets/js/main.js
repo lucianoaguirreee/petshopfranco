@@ -1,9 +1,9 @@
-let dataTipos = [];
-let tipo = document.querySelector(".farmacia") ? "Medicamento" : "Juguete";
-let endPoint = `https://apipetshop.herokuapp.com/api/articulos`;
-
+let dataTipos = []
+let tipo = document.querySelector(".farmacia") ? "Medicamento" : "Juguete"
+let endPoint = `https://apipetshop.herokuapp.com/api/articulos`
+let carritoNumero = document.querySelector('#count')
 let arregloProductos = [];
-let cardElement = document.querySelector("#container-productos");
+let cardElement = document.querySelector("#container-productos")
 fetch(endPoint)
   .then((res) => res.json())
   .then((data) => {
@@ -15,7 +15,7 @@ fetch(endPoint)
         precio: elem.precio,
         imagen: elem.imagen,
       };
-      return procesado;
+      return procesado
     });
 
     if (document.title === 'PetShop | Juguetes' || document.title === 'PetShop | Farmacia') {
@@ -41,95 +41,183 @@ fetch(endPoint)
             </div>
         </div>`;
         }
-      });
+      })
     }
   })
-  .catch((err) => console.error(err));
+  .catch((err) => console.error(err))
 
 function guardaDatos(id) {
-  let arrayData = [];
-  let nombre_producto;
-  let precio_producto;
-  let nombre_imagen;
+  let nombre_producto
+  let precio_producto
+  let nombre_imagen
   arregloProductos.forEach((elem) => {
     if (elem.id === id) {
-      nombre_producto = elem.nombre;
-      precio_producto = elem.precio;
-      nombre_imagen = elem.imagen;
+      nombre_producto = elem.nombre
+      precio_producto = elem.precio
+      nombre_imagen = elem.imagen
     }
   });
-  let str = "cantidad-" + id;
   let data = [
     {
       id,
-      cantidad: parseInt(document.getElementById(str).value),
+      cantidad: parseInt(document.getElementById("cantidad-" + id).value),
       nombre: nombre_producto,
       precio: precio_producto,
       imagen: nombre_imagen,
     },
-  ];
-  let datosGuardados = localStorage.getItem("datosGuardados");
+  ]
+  let datosGuardados = localStorage.getItem("datosGuardados")
   if (datosGuardados === null) {
-    localStorage.setItem("datosGuardados", JSON.stringify(data));
+    localStorage.setItem("datosGuardados", JSON.stringify(data))
   } else {
     let newData = JSON.parse(datosGuardados)
     let yaEsta = false
     newData.forEach(elem => {
       elem.cantidad = parseInt(elem.cantidad)
-      if(elem.id === data[0].id){
+      if (elem.id === data[0].id) {
         yaEsta = true
-        elem.cantidad += data[0].cantidad 
+        elem.cantidad += data[0].cantidad
       }
 
     })
-    if(yaEsta){
+    if (yaEsta) {
       data = newData
-    }else{
+    } else {
       newData.forEach((elem) => data.push(elem))
-    } 
-    localStorage.setItem("datosGuardados", JSON.stringify(data));
+    }
+    localStorage.setItem("datosGuardados", JSON.stringify(data))
   }
 }
 
 if (document.title != "PetShop | Carrito") {
-  cardElement.addEventListener("click", agregarAlCarrito);
+  cardElement.addEventListener("click", agregarAlCarrito, count)
 }
 
 function agregarAlCarrito(e) {
   if (e.target.classList.contains("boton-comprar")) {
-    guardaDatos(e.target.id);
+    guardaDatos(e.target.id)
+
+    let contador;
+    contador = contar()
+    console.log(contador)
+
   }
+
+
 }
 
 function traerDatos(key) {
   let datos = localStorage.getItem(key);
-  return JSON.parse(datos);
+  return JSON.parse(datos)
 }
 
-let dataStorage = traerDatos("datosGuardados");
-// console.log(dataStorage)
+let dataStorage = traerDatos("datosGuardados")
+
 function agregarDatos(id) {
-  let tablaArticulos = document.querySelector(`#${id}`);
-  dataStorage.forEach((elem) => {
-    tablaArticulos.innerHTML += `<tr>
-                                    <td class="product__cart__item">
-                                        <div class="product__cart__item__pic">
-                                            <img class="shopping__cart__table-img" src="${elem.imagen}">
-                                        </div>
-                                        <div class="product__cart__item__text">
-                                            <h6>${elem.nombre}</h6>
-                                            <h5 id="id">$ ${elem.precio}</h5>
-                                        </div>
-                                    </td>
-                                    <td class="quantity__item">
-                                        <div class="quantity">
-                                            <div class="pro-qty-2">
-                                                <input type="text" value="1" readonly>
-                                            </div>
-                                        </div>
-                                    </td>
-                                    <td id="ccu-total" class="cart__price">$ ${elem.precio}</td>
-                                  </tr>`;
-  });
+  let tablaArticulos = document.querySelector(`#${id}`)
+  if (tablaArticulos) {
+    dataStorage.forEach((elem) => {
+      tablaArticulos.innerHTML += `<tr>
+                                      <td class="product__cart__item">
+                                          <div class="product__cart__item__pic">
+                                          <a type="button" id="${elem.id}" class="btn btn-danger eliminar">X</a>
+                                          </div>
+                                          <div class="product__cart__item__pic">
+                                              <img class="shopping__cart__table-img" src="${elem.imagen}">
+                                          </div>
+                                          <div class="product__cart__item__text">
+                                              <h6>${elem.nombre}</h6>
+                                              <h5 id="id">$ ${elem.precio}</h5>
+                                          </div>
+                                      </td>
+                                      <td class="quantity__item">
+                                          <div class="quantity">
+                                              <div class="pro-qty-2">
+                                              <input id="cantidad-${elem._id}" class="text-center" type="number" name="cantidad-id"
+                                              min="1" max="${elem.stock}" step="1" value="${elem.cantidad}">
+                                                              </div>
+                                          </div>
+                                      </td>
+                                      <td id="ccu-total" class="cart__price">$ ${elem.precio}</td>
+                                   </tr>`
+    })
+  }
+
 }
-agregarDatos("tabla_articulos");
+agregarDatos("tabla_articulos")
+
+console.log(dataStorage)
+
+let tabla_articulos = document.querySelector('#tabla_articulos')
+
+
+
+
+if (document.title === 'PetShop | Carrito') {
+  tabla_articulos.addEventListener('click', eliminarArticulos)
+
+  let comprar = document.querySelector('#comprar')
+
+  comprar.addEventListener('click', () => {
+    Swal.fire(
+      'Compra finalizada!',
+      'Gracias por su compra!',
+      'success'
+    )
+
+    tabla_articulos = ""
+
+  })
+}
+
+function eliminarArticulos(e) {
+  if (e.target.classList.contains("eliminar")) {
+    console.log(e.target)
+  }
+}
+
+// function eliminaArticulo(e){
+
+// console.log(e.target)
+
+// let index = dataStorage.findIndex(el=> el.id == e.target.id)
+// dataStorage.splice(index, 1)
+// console.log(index)
+// console.log(e.target.id)
+// let r = dataStorage.indexOf(e.target.id)
+// console.log(r)
+// }
+
+// function eliminarArticulo(e) {
+
+// }
+
+function count() {
+  if (dataStorage != 0) {
+    carritoNumero.innerText = dataStorage.length
+  } else {
+    carritoNumero.innerText = '0'
+  }
+}
+
+
+
+if (dataStorage === null || dataStorage.length >=0) {
+  console.log('no hay nada');
+} else {
+  contar()
+}
+
+
+function contar() {
+  console.log('agregando');
+  let contador;
+
+  dataStorage.forEach(producto => {
+    contador = producto.cantidad++
+    // console.log(producto.cantidad );
+    // carritoNumero.innerText = dataStorage.length
+  });
+
+  return contador
+}
