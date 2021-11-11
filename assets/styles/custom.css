@@ -84,8 +84,8 @@ h1 {
   overflow: hidden;
 }
 .img-section {
-  height: 120px;
-  width: 120px;
+  height: 100px;
+  width: 100px;
   border-radius: 50%;
   object-fit: cover;
   object-position: center;

@@ -3,7 +3,7 @@ let tipo = document.querySelector(".farmacia") ? "Medicamento" : "Juguete"
 let endPoint = `https://apipetshop.herokuapp.com/api/articulos`
 
 let arregloProductos = [];
-<<<<<<< HEAD
+
 let varStockGlobal = 0
 let cardElement = document.querySelector("#container-productos");
 fetch(endPoint)
@@ -13,22 +13,34 @@ fetch(endPoint)
       console.log("el arreglo es:")
       console.log(dataTipos)
       console.log("el arreglo fue.")
-=======
 let cardElement = document.querySelector("#container-productos")
 fetch(endPoint)
   .then((res) => res.json())
   .then((data) => {
     dataTipos = data.response;
-    arregloProductos = dataTipos.map((elem) => {
-      let procesado = {
-        id: elem._id,
-        nombre: elem.nombre,
-        precio: elem.precio,
-        imagen: elem.imagen,
-      };
-      return procesado
+    dataTipos.forEach((elem) => {
+      if (elem.tipo == tipo) {
+        cardElement.innerHTML += `<div class="col-6 p-2">
+        <div class="card w-100 border border-primary d-flex align-items-center justify-content-evenly flex-column card-size">
+            <img class="lazyloaded img-producto img-fluid"
+                src="${elem.imagen}"
+                alt="${elem.nombre}">
+            <div class="d-flex flex-column justify-content-evenly">
+                <h5 class="card-title fw-bold text-center nombre">${elem.nombre}</h5>
+                <p class="card-text text-center precio fw-bold">$ ${elem.precio}</p>
+                <div class="text-center pb-3">
+                    <label for="price" class="cantidad">Cantidad: </label>
+                    <input id="cantidad-${elem._id}" class="text-center" type="number" name="cantidad-id"
+                        min="1" max="${elem.stock}" step="1" value="1">
+                </div>
+                <div class="d-flex align-items-center justify-content-center">
+                  <a id="${elem._id}" class="boton-comprar btn btn-primary bg-custom mb-3">Agregar al carrito</a>
+                </div>
+            </div>
+        </div>
+    </div>`;
+      }
     });
->>>>>>> ca7a82ae52b9197420bcc77a8b01f8a828fa40e6
 
       let datosGuardados = localStorage.getItem("datosGuardados")
 
@@ -100,25 +112,16 @@ fetch(endPoint)
                         </div>
                     </div>
                 </div>
-<<<<<<< HEAD
               </div>`;
             }
   
           }
         });
       }
-=======
-            </div>
-        </div>`;
-        }
-      })
-    }
->>>>>>> ca7a82ae52b9197420bcc77a8b01f8a828fa40e6
   })
   .catch((err) => console.error(err))
 
 function guardaDatos(id) {
-<<<<<<< HEAD
   
   let nombre_producto;
   let precio_producto;
@@ -142,10 +145,10 @@ function guardaDatos(id) {
     {
       id,
       cantidad: qty,
-=======
-  let nombre_producto
-  let precio_producto
-  let nombre_imagen
+      let nombre_producto;
+      let precio_producto;
+      let nombre_imagen;
+
   arregloProductos.forEach((elem) => {
     if (elem.id === id) {
       nombre_producto = elem.nombre
@@ -157,7 +160,6 @@ function guardaDatos(id) {
     {
       id,
       cantidad: parseInt(document.getElementById("cantidad-"+id).value),
->>>>>>> ca7a82ae52b9197420bcc77a8b01f8a828fa40e6
       nombre: nombre_producto,
       precio: precio_producto,
       imagen: nombre_imagen,
@@ -194,7 +196,6 @@ if (document.title != "PetShop | Carrito") {
 
 function agregarAlCarrito(e) {
   if (e.target.classList.contains("boton-comprar")) {
-<<<<<<< HEAD
     
     if (document.getElementById("cantidad-"+e.target.id))
     {
@@ -218,9 +219,6 @@ function agregarAlCarrito(e) {
               `;
         }
     }
-=======
-    guardaDatos(e.target.id)
->>>>>>> ca7a82ae52b9197420bcc77a8b01f8a828fa40e6
   }
 }
 
@@ -271,19 +269,3 @@ function eliminarArticulos(e) {
     console.log(e.target)
   }
 }
-
-// function eliminaArticulo(e){
-
-  // console.log(e.target)
-
-  // let index = dataStorage.findIndex(el=> el.id == e.target.id)
-  // dataStorage.splice(index, 1)
-  // console.log(index)
-  // console.log(e.target.id)
-  // let r = dataStorage.indexOf(e.target.id)
-  // console.log(r)
-// }
-
-// function eliminarArticulo(e) {
-  
-// }
