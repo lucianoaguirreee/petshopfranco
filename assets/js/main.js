@@ -96,6 +96,7 @@ if (document.title != "PetShop | Carrito") {
 function agregarAlCarrito(e) {
   if (e.target.classList.contains("boton-comprar")) {
     guardaDatos(e.target.id)
+    imprimirCantidad()
   }
 
 
@@ -190,24 +191,6 @@ function eliminarArticulos(e) {
 // function eliminarArticulo(e) {
 
 // }
-
-
-function contar() {
-  let total = 0
-  let datos = localStorage.getItem("datosGuardados")
-  if (datos) {
-    let data = JSON.parse(datos)
-    data.forEach((elem) => {
-      total += parseInt(elem.precio) * parseInt(elem.cantidad)
-    })
-  }
-  // let cantidadDOM = document.querySelector('#cantidad').innerText 
-  // cantidadDOM = cantidad
-  let totalDOM = document.querySelector('#total')
-  totalDOM.innerText = `$ ${total}`
-}
-
-// imprimir la cantidad de elementos en el carrito en la id "cantidad-carrito"
 
 function imprimirCantidad() {
   let datos = localStorage.getItem("datosGuardados")
