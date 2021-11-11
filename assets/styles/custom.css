@@ -429,5 +429,7 @@ textarea {
     max-width: 100%;
     min-width: 100%;
   }
-  
+  .d-none {
+    display: none;
+  }
 }
