@@ -421,3 +421,13 @@ ul {
 textarea {
   max-height: 150px;
 }
+
+
+@media (max-width: 600px) {
+
+  .us-w-100 {
+    max-width: 100%;
+    min-width: 100%;
+  }
+  
+}

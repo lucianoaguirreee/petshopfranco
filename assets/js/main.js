@@ -65,7 +65,8 @@ fetch(endPoint)
                 </div>
               </div>`;
             } else {
-              cardElement.innerHTML += `<div class="col-4 p-2">
+              
+              cardElement.innerHTML += `<div class="d-flex justify-content-center us-w-100 sm-w-50 md-w-50 col-sm-12 col-md-6 col-lg-4 p-2">
                 <div class="card w-100 p-6 d-flex align-items-center justify-content-evenly flex-column card-border border-2 card-size">
                     <img class="lazyloaded img-producto"
                         src="${elem.imagen}"
