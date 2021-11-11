@@ -3,7 +3,6 @@
 let dataTipos = []
 let tipo = document.querySelector(".farmacia") ? "Medicamento" : "Juguete"
 let endPoint = `https://apipetshop.herokuapp.com/api/articulos`
-let carritoNumero = document.querySelector('#cantidad-carrito')
 let arregloProductos = [];
 let cardElement = document.querySelector("#container-productos")
 let cantidad = 0
@@ -12,7 +11,6 @@ let costoEnvio = document.querySelector('#costoEnvio')
 let codigoCupon = document.querySelector('#codigoCupon')
 let total = document.querySelector('#total')
 let envio = 1000
-let cantidadDOM = document.querySelector('#cantidad-carrito')
 
 fetch(endPoint)
   .then((res) => res.json())
@@ -52,7 +50,7 @@ fetch(endPoint)
     });
 
     if (document.title === 'PetShop | Juguetes' || document.title === 'PetShop | Farmacia') {
-
+      imprimirCantidad()
       arregloProductos.forEach((elem) => {
         if (elem.tipo == tipo) {
 
@@ -63,7 +61,7 @@ fetch(endPoint)
                         src="${elem.imagen}"
                         alt="${elem.nombre}">
                     <div class="d-flex flex-column justify-content-evenly">
-                        <h5 class="card-title fw-bold text-center pt-3 nombre">${elem.nombre}</h5>
+                        <h5 class="card-title fw-bold id="nombre-${elem._id}" text-center pt-3 nombre">${elem.nombre}</h5>
                         <p class="card-text text-center precio fw-bold">$ ${elem.precio}</p>
                         <div id="div-cantidad-${elem._id}" class="text-center pb-3">
                           <label for="price" class="cantidad">Cantidad: </label>
@@ -82,7 +80,7 @@ fetch(endPoint)
                         src="${elem.imagen}"
                         alt="${elem.nombre}">
                     <div class="d-flex flex-column justify-content-evenly">
-                        <h5 class="card-title fw-bold text-center pt-3 nombre">${elem.nombre}</h5>
+                        <h5 class="card-title fw-bold text-center pt-3 nombre" id="nombre-${elem._id}">${elem.nombre}</h5>
                         <p class="card-text text-center precio fw-bold">$ ${elem.precio}</p>
                         <div id="div-cantidad-${elem._id}" class="text-center pb-3">
                             <label for="price" class="cantidad">Cantidad: </label>
@@ -160,6 +158,7 @@ function guardaDatos(id) {
 
 if (document.title != "PetShop | Carrito") {
   cardElement.addEventListener("click", agregarAlCarrito)
+  imprimirCantidad()
 }
 
 function agregarAlCarrito(e) {
@@ -191,13 +190,33 @@ function agregarAlCarrito(e) {
 
 
     }
-    guardaDatos(e.target.id)
-    datosTotales(dataStorage)
-    
 
+    let nombreItem = `nombre-${e.target.id}`
+    console.log(e.target.id)
+    const Toast = Swal.mixin({
+      text: `A custom <span style="color:#F8BB86">html<span> message.`,
+      toast: true,
+      position: 'bottom-right',
+      showConfirmButton: false,
+      timer: 3000,
+      confirmButtonColor: "#098ccf",
+      background: "#098ccf",
+      confirmButtonText: "Continuar",
+      iconColor: "#fca922",
+      timerProgressBar: true,
+      didOpen: (toast) => {
+        toast.addEventListener('mouseenter', Swal.stopTimer)
+        toast.addEventListener('mouseleave', Swal.resumeTimer)
+      }
+    })
+
+    Toast.fire({
+      icon: 'success',
+      title: `<span style="color:#FFF">Articulo agregado...<span>`
+    })
   }
 
-
+  imprimirCantidad()
 }
 
 function traerDatos(key) {
@@ -219,7 +238,7 @@ function imprimirDatos(array, id) {
                                              <img class="shopping__cart__table-img" src="${elem.imagen}">
                                          </div>
                                          <div class="product__cart__item__text">
-                                             <h6>${elem.nombre}</h6>
+                                             <h6 id="nombre-${elem._id}">${elem.nombre}</h6>
                                              <h5 id="id">$ ${elem.precio}</h5>
                                          </div>
                                      </td>
@@ -303,21 +322,41 @@ if (document.title === 'PetShop | Carrito') {
       })
     })
   }
-
+  imprimirCantidad()
   
 }
 
 function eliminarArticulos(e) {
   if (e.target.classList.contains("eliminar")) {
+    
     let index = dataStorage.findIndex(el => el.id == e.target.id)
     dataStorage.splice(index, 1)
     localStorage.setItem("datosGuardados", JSON.stringify(dataStorage))
-    imprimirDatos(dataStorage, "tabla_articulos")
-    // spam.innerText = ""    
+    imprimirDatos(dataStorage, "tabla_articulos") 
     datosTotales(dataStorage)
-    
+    imprimirCantidad()
+    // let nombreItem = `nombre-${e.target.id}`
+    const Toast = Swal.mixin({
+      // text: document.getElementById(nombreItem).innerText,
+      toast: true,
+      position: 'bottom-right',
+      showConfirmButton: false,
+      timer: 3000,
+      timerProgressBar: true,
+      didOpen: (toast) => {
+        toast.addEventListener('mouseenter', Swal.stopTimer)
+        toast.addEventListener('mouseleave', Swal.resumeTimer)
+      }
+    })
+  
+    Toast.fire({
+      icon: 'error',
+      title: 'Articulo eliminado ...'
+    })
   }
 
+  
+  
 }
 
 function datosTotales() {
@@ -350,6 +389,20 @@ let arrayCupon = ['franco', 'grupo5', 'mindhub']
 
 let inputCupon = document.querySelector('#cupon')
 
-let numeroCarro = document.querySelector('#cantidad')
+function imprimirCantidad() {
+  let datos = localStorage.getItem("datosGuardados")
+  let cantidad = 0
+  if (datos) {
+    let data = JSON.parse(datos)
+    data.forEach((elem) => {
+      cantidad += parseInt(elem.cantidad)
+    })
+  }
+  
+  let cantidadDOMuno = document.querySelector('#cantidad-carrito1')
 
-console.log(numeroCarro)
+  let cantidadDOMdos = document.querySelector('#cantidad-carrito2')
+
+  cantidadDOMuno.innerText = cantidad
+  cantidadDOMdos.innerText = cantidad
+}
