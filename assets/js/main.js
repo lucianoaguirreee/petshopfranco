@@ -1,8 +1,9 @@
-let dataTipos = [];
-let tipo = document.querySelector(".farmacia") ? "Medicamento" : "Juguete";
-let endPoint = `https://apipetshop.herokuapp.com/api/articulos`;
+let dataTipos = []
+let tipo = document.querySelector(".farmacia") ? "Medicamento" : "Juguete"
+let endPoint = `https://apipetshop.herokuapp.com/api/articulos`
 
 let arregloProductos = [];
+<<<<<<< HEAD
 let varStockGlobal = 0
 let cardElement = document.querySelector("#container-productos");
 fetch(endPoint)
@@ -12,6 +13,22 @@ fetch(endPoint)
       console.log("el arreglo es:")
       console.log(dataTipos)
       console.log("el arreglo fue.")
+=======
+let cardElement = document.querySelector("#container-productos")
+fetch(endPoint)
+  .then((res) => res.json())
+  .then((data) => {
+    dataTipos = data.response;
+    arregloProductos = dataTipos.map((elem) => {
+      let procesado = {
+        id: elem._id,
+        nombre: elem.nombre,
+        precio: elem.precio,
+        imagen: elem.imagen,
+      };
+      return procesado
+    });
+>>>>>>> ca7a82ae52b9197420bcc77a8b01f8a828fa40e6
 
       let datosGuardados = localStorage.getItem("datosGuardados")
 
@@ -83,16 +100,25 @@ fetch(endPoint)
                         </div>
                     </div>
                 </div>
+<<<<<<< HEAD
               </div>`;
             }
   
           }
         });
       }
+=======
+            </div>
+        </div>`;
+        }
+      })
+    }
+>>>>>>> ca7a82ae52b9197420bcc77a8b01f8a828fa40e6
   })
-  .catch((err) => console.error(err));
+  .catch((err) => console.error(err))
 
 function guardaDatos(id) {
+<<<<<<< HEAD
   
   let nombre_producto;
   let precio_producto;
@@ -116,15 +142,31 @@ function guardaDatos(id) {
     {
       id,
       cantidad: qty,
+=======
+  let nombre_producto
+  let precio_producto
+  let nombre_imagen
+  arregloProductos.forEach((elem) => {
+    if (elem.id === id) {
+      nombre_producto = elem.nombre
+      precio_producto = elem.precio
+      nombre_imagen = elem.imagen
+    }
+  });
+    let data = [
+    {
+      id,
+      cantidad: parseInt(document.getElementById("cantidad-"+id).value),
+>>>>>>> ca7a82ae52b9197420bcc77a8b01f8a828fa40e6
       nombre: nombre_producto,
       precio: precio_producto,
       imagen: nombre_imagen,
       stock: varStockGlobal
     },
-  ];
-  let datosGuardados = localStorage.getItem("datosGuardados");
+  ]
+  let datosGuardados = localStorage.getItem("datosGuardados")
   if (datosGuardados === null) {
-    localStorage.setItem("datosGuardados", JSON.stringify(data));
+    localStorage.setItem("datosGuardados", JSON.stringify(data))
   } else {
     let newData = JSON.parse(datosGuardados)
     let yaEsta = false
@@ -142,16 +184,17 @@ function guardaDatos(id) {
     }else{
       newData.forEach((elem) => data.push(elem))
     } 
-    localStorage.setItem("datosGuardados", JSON.stringify(data));
+    localStorage.setItem("datosGuardados", JSON.stringify(data))
   }
 }
 
 if (document.title != "PetShop | Carrito") {
-  cardElement.addEventListener("click", agregarAlCarrito);
+  cardElement.addEventListener("click", agregarAlCarrito)
 }
 
 function agregarAlCarrito(e) {
   if (e.target.classList.contains("boton-comprar")) {
+<<<<<<< HEAD
     
     if (document.getElementById("cantidad-"+e.target.id))
     {
@@ -175,21 +218,26 @@ function agregarAlCarrito(e) {
               `;
         }
     }
+=======
+    guardaDatos(e.target.id)
+>>>>>>> ca7a82ae52b9197420bcc77a8b01f8a828fa40e6
   }
 }
 
 function traerDatos(key) {
   let datos = localStorage.getItem(key);
-  return JSON.parse(datos);
+  return JSON.parse(datos)
 }
 
-let dataStorage = traerDatos("datosGuardados");
-// console.log(dataStorage)
+let dataStorage = traerDatos("datosGuardados")
 function agregarDatos(id) {
-  let tablaArticulos = document.querySelector(`#${id}`);
+  let tablaArticulos = document.querySelector(`#${id}`)
   dataStorage.forEach((elem) => {
     tablaArticulos.innerHTML += `<tr>
                                     <td class="product__cart__item">
+                                        <div class="product__cart__item__pic">
+                                        <a type="button" id="${elem.id}" class="btn btn-danger eliminar">X</a>
+                                        </div>
                                         <div class="product__cart__item__pic">
                                             <img class="shopping__cart__table-img" src="${elem.imagen}">
                                         </div>
@@ -201,12 +249,41 @@ function agregarDatos(id) {
                                     <td class="quantity__item">
                                         <div class="quantity">
                                             <div class="pro-qty-2">
-                                                <input type="text" value="1" readonly>
-                                            </div>
+                                            <input id="cantidad-${elem._id}" class="text-center" type="number" name="cantidad-id"
+                                            min="1" max="${elem.stock}" step="1" value="${elem.cantidad}">
+                                                            </div>
                                         </div>
                                     </td>
                                     <td id="ccu-total" class="cart__price">$ ${elem.precio}</td>
-                                  </tr>`;
-  });
+                                 </tr>`
+  })
 }
-agregarDatos("tabla_articulos");
+agregarDatos("tabla_articulos")
+
+console.log(dataStorage)
+
+let tabla_articulos = document.querySelector('#tabla_articulos')
+
+tabla_articulos.addEventListener('click', eliminarArticulos)
+
+function eliminarArticulos(e) {
+  if (e.target.classList.contains("eliminar")) {
+    console.log(e.target)
+  }
+}
+
+// function eliminaArticulo(e){
+
+  // console.log(e.target)
+
+  // let index = dataStorage.findIndex(el=> el.id == e.target.id)
+  // dataStorage.splice(index, 1)
+  // console.log(index)
+  // console.log(e.target.id)
+  // let r = dataStorage.indexOf(e.target.id)
+  // console.log(r)
+// }
+
+// function eliminarArticulo(e) {
+  
+// }
