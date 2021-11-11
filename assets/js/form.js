@@ -5,6 +5,12 @@ const expresiones = {
     numero: /^\d{7,14}$/, //
 }
 
+const campos = {
+    'form-name': false,
+    'form-email': false,
+    'form-number': false,
+    'form-subject': false,
+}
 
 const form = document.getElementById('form')
 const inputs = document.querySelectorAll('#form input')
@@ -35,10 +41,12 @@ const validarCampo = (expresion, input, campo, icono) => {
         document.getElementById(`${campo}`).classList.add('form-correct')
         document.getElementById(`${icono}`).classList.add('bi-check2-circle')
         document.getElementById(`${icono}`).classList.remove('bi-x-lg')
+        campos[campo] = true;
     }else{
         document.getElementById(`${campo}`).classList.add('form-error')
         document.getElementById(`${campo}`).classList.remove('form-correct')
         document.getElementById(`${icono}`).classList.add('bi-x-lg')
+        campos[campo] = false;
     }
 }
 
@@ -51,5 +59,11 @@ inputs.forEach((input) => {
 
 form.addEventListener('submit', (e) => {
     e.preventDefault();
-    
+
+    if(campos['form-name'] && campos['form-email'] && campos['form-number'] & campos['form-subject']){
+        form.reset();
+        alert('formulario ingresado con exito')
+    }else{
+        alert('debes ingresar correctamente')
+    }
 })
