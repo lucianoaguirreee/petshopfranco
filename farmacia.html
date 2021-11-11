@@ -33,7 +33,7 @@
                     </li>
 
                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                        <a class="nav-link dropdown-toggle active" href="#" id="navbarDropdown" role="button"
                             data-bs-toggle="dropdown" aria-expanded="false">
                             Shop
                         </a>
@@ -46,16 +46,22 @@
                         <a class="nav-link" href="./contacto.html">Contacto</a>
                     </li>
                     <li>
+
+                        <div class="pe-5 my-3 d-sm-block d-lg-none ">
+                            <a type="button" href="./carrito.html" class="btn position-relative bg-white-custom bg-naranja">
+                                <i class="uil uil-user text-azul fs-2"></i>
+                            </a>
+                        </div>
+
                         <div class="pe-5 my-3 d-none d-sm-block d-lg-none ">
-                            <a type="button" href="./carrito.html"
-                                class="btn position-relative bg-white-custom bg-naranja">
+                            <a type="button" href="./carrito.html" class="btn position-relative bg-white-custom bg-naranja">
                                 <i class="uil uil-shopping-cart fs-2 text-azul"></i>
-                                <span
-                                    class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger fs-6">
+                                <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger fs-6">
                                     <span id="cantidad-carrito1" class="carritoCuenta">0</span>
                                 </span>
                             </a>
                         </div>
+
                     </li>
                 </ul>
             </div>
@@ -106,6 +112,7 @@
 
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="./assets/js/main.js"></script>
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </body>
 
 </html>

@@ -49,12 +49,12 @@ fetch(endPoint)
       return procesado;
     });
 
+    
     if (document.title === 'PetShop | Juguetes' || document.title === 'PetShop | Farmacia') {
-      imprimirCantidad()
       arregloProductos.forEach((elem) => {
         if (elem.tipo == tipo) {
           if (elem.stock === 0) {
-            cardElement.innerHTML += `<div class="col-4 p-2">
+            cardElement.innerHTML += `<div class="d-flex justify-content-center us-w-100 sm-w-50 md-w-50 col-sm-12 col-md-6 col-lg-4 p-2">
                 <div class="card w-100 p-6 d-flex align-items-center justify-content-evenly flex-column card-border border-2 card-size">
                     <img class="lazyloaded img-producto"
                         src="${elem.imagen}"
@@ -74,7 +74,7 @@ fetch(endPoint)
                 </div>
               </div>`;
           } else if (elem.stock < 5) {
-            cardElement.innerHTML += `<div class="col-4 p-2">
+            cardElement.innerHTML += `<div class="d-flex justify-content-center us-w-100 sm-w-50 md-w-50 col-sm-12 col-md-6 col-lg-4 p-2">
                 <div class="card w-100 p-6 d-flex align-items-center justify-content-evenly flex-column card-border border-2 card-size">
                     <img class="lazyloaded img-producto"
                         src="${elem.imagen}"
@@ -97,7 +97,7 @@ fetch(endPoint)
             </div>
         </div>`;
           } else {
-            cardElement.innerHTML += `<div class="col-4 p-2">
+            cardElement.innerHTML += `<div class="d-flex justify-content-center us-w-100 sm-w-50 md-w-50 col-sm-12 col-md-6 col-lg-4 p-2">
                 <div class="card w-100 p-6 d-flex align-items-center justify-content-evenly flex-column card-border border-2 card-size">
                     <img class="lazyloaded img-producto"
                         src="${elem.imagen}"
@@ -123,6 +123,7 @@ fetch(endPoint)
       }
       )
     }
+    imprimirCantidad()
   })
   .catch((err) => console.error(err))
 
@@ -305,32 +306,45 @@ if (document.title === 'PetShop | Carrito') {
 
     e.preventDefault()
 
-    Swal.fire({
-      icon: 'success',
-      title: `<span style="color:#FFF">¡Gracias por su compra!<span>`,
-      text: 'El envio llegara dentro de 3 o 4 días habiles',
-      confirmButtonColor: "#fca922",
-      background: "#098ccf",
-      confirmButtonText: "Continuar",
-      iconColor: "#fca922",
-    })
+    if (dataStorage.length) {
+      Swal.fire({
+        icon: 'success',
+        title: `<span style="color:#FFF">¡Gracias por su compra!<span>`,
+        text: 'El envio llegara dentro de 3 o 4 días habiles',
+        confirmButtonColor: "#fca922",
+        background: "#098ccf",
+        confirmButtonText: "Continuar",
+        iconColor: "#fca922",
+      })
+      
+      total.innerText = `$ ${0}`
+      cantidadTotal = 0
+      costoEnvio.innerText = `$ ${0}`
+      spam.innerText = `$ ${cantidadTotal}`
+  
+      localStorage.removeItem('datosGuardados')
+      let tabla = document.querySelector('#tabla_articulos tbody')
+      tabla.innerHTML = ""
+      div.innerHTML = `<div class="alert text-center bg-custom fw-bold text-white" role="alert">
+      No agregaste nada al carrito ...
+      </div>`
+  
+      let cantidadDOMuno = document.querySelector('#cantidad-carrito1')
+      let cantidadDOMdos = document.querySelector('#cantidad-carrito2')
+      cantidadDOMuno.innerText = 0
+      cantidadDOMdos.innerText = 0
+    } else {
+      Swal.fire({
+        icon: 'error',
+        title: `<span style="color:#FFF">Error<span>`,
+        text: 'Debe tener al menos un articulo en el carrito para comprar',
+        confirmButtonColor: "#fca922",
+        background: "#098ccf",
+        confirmButtonText: "Continuar",
+        iconColor: "#fca922",
+      })
+    }
     
-    total.innerText = `$ ${0}`
-    cantidadTotal = 0
-    costoEnvio.innerText = `$ ${0}`
-    spam.innerText = `$ ${cantidadTotal}`
-
-    localStorage.removeItem('datosGuardados')
-    let tabla = document.querySelector('#tabla_articulos tbody')
-    tabla.innerHTML = ""
-    div.innerHTML = `<div class="alert alert-info text-center" role="alert">
-    No agregaste nada al carrito ...
-    </div>`
-
-    let cantidadDOMuno = document.querySelector('#cantidad-carrito1')
-    let cantidadDOMdos = document.querySelector('#cantidad-carrito2')
-    cantidadDOMuno.innerText = 0
-    cantidadDOMdos.innerText = 0
   })
 
   imprimirDatos(dataStorage, "tabla_articulos")
@@ -342,14 +356,13 @@ if (document.title === 'PetShop | Carrito') {
       e.preventDefault()
       if (arrayCupon.includes(inputCupon.value)) {
         envio = 500
-        // console.log(cantidadTotal)
         total.innerText = `$ ${(cantidadTotal + 500)}`
         costoEnvio.innerText = `$ ${envio}`
         codigoCupon.innerText = `$ ${envio}`
       }
     })
   } else {
-    botonCupon.addEventListener('click', e => {
+    botonCupon.addEventListener('click', () => {
       Swal.fire({
         icon: 'error',
         title: `<span style="color:#FFF">Oops...<span>`,
@@ -374,9 +387,8 @@ function eliminarArticulos(e) {
     imprimirDatos(dataStorage, "tabla_articulos") 
     datosTotales(dataStorage)
     imprimirCantidad()
-    // let nombreItem = `nombre-${e.target.id}`
+
     const Toast = Swal.mixin({
-      // text: document.getElementById(nombreItem).innerText,
       toast: true,
       position: 'bottom-right',
       showConfirmButton: false,
@@ -396,10 +408,8 @@ function eliminarArticulos(e) {
       icon: 'error',
       title: `<span style="color:#FFF">Articulo eliminado...<span>`
     })
-  }
 
-  
-  
+  }
 }
 
 function datosTotales() {
