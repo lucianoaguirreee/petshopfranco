@@ -213,3 +213,18 @@ function agregarDatos(id) {
   });
 }
 agregarDatos("tabla_articulos");
+
+function imprimirCantidad() {
+  let datos = localStorage.getItem("datosGuardados")
+  let cantidad = 0
+  if (datos) {
+    let data = JSON.parse(datos)
+    data.forEach((elem) => {
+      cantidad += parseInt(elem.cantidad)
+    })
+  }
+  let cantidadDOM = document.querySelector('#cantidad-carrito')
+  cantidadDOM.innerText = cantidad
+}
+
+imprimirCantidad()
