@@ -59,7 +59,7 @@ fetch(endPoint)
                     <img class="lazyloaded img-producto"
                         src="${elem.imagen}"
                         alt="${elem.nombre}">
-                        <p id="alerta-stock-${elem._id}" class="badge bg-white rounded-pill fs-6 text-decoration-none text-white"> - </p>
+                        <p id="alerta-stock-${elem._id}" class="badge bg-white rounded-pill fs-6 text-decoration-none invisible text-white"> - </p>
                     <div class="d-flex flex-column justify-content-evenly">
                         <h5 class="card-title fw-bold text-center pt-3 nombre" id="nombre-${elem._id}">${elem.nombre}</h5>
                         <p class="card-text text-center precio fw-bold">$ ${elem.precio}</p>
@@ -102,7 +102,7 @@ fetch(endPoint)
                     <img class="lazyloaded img-producto"
                         src="${elem.imagen}"
                         alt="${elem.nombre}">
-                        <p id="alerta-stock-${elem._id}" class="badge bg-white rounded-pill fs-6 text-decoration-none text-white"> - </p>
+                        <p id="alerta-stock-${elem._id}" class="badge bg-white rounded-pill fs-6 text-decoration-none invisible text-white"> - </p>
                     <div class="d-flex flex-column justify-content-evenly">
                         <h5 class="card-title fw-bold text-center pt-3 nombre" id="nombre-${elem._id}">${elem.nombre}</h5>
                         <p class="card-text text-center precio fw-bold">$ ${elem.precio}</p>
@@ -181,7 +181,7 @@ function guardaDatos(id) {
   }
 }
 
-if (document.title != "PetShop | Carrito") {
+if (document.title != "PetShop | Carrito" && document.title != "PetShop | Home") {
   cardElement.addEventListener("click", agregarAlCarrito)
   imprimirCantidad()
 }
@@ -458,4 +458,28 @@ function imprimirCantidad() {
 
   cantidadDOMuno.innerText = cantidad
   cantidadDOMdos.innerText = cantidad
+}
+
+if (document.title === 'PetShop | Home') {
+  
+  let shop = document.querySelector('#shop')
+
+  shop.addEventListener('click', () => {
+    console.log('shop')
+    Swal.fire({
+      title: '<strong class="text-white">Que sección quiere ver</strong>',
+      icon: 'question',
+      showCloseButton: true,
+      showCancelButton: true,
+      focusConfirm: false,
+      confirmButtonText: '<a href="./juguetes.html" class="text-decoration-none fw-bold text-white">Juguetes<a>',
+      confirmButtonAriaLabel: 'Thumbs up, great!',
+      cancelButtonText:'<a href="./farmacia.html" class="text-decoration-none fw-bold text-white">Farmacia<a>',
+      confirmButtonColor: "#fca922",
+      cancelButtonColor: "#fca922",
+      background: "#098ccf",
+      iconColor: "#fca922"
+    })
+  })
+
 }
