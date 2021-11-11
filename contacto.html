@@ -20,7 +20,7 @@
     <nav class="sticky-top navbar navbar-expand-lg navbar-dark bg-custom">
         <div class="container-fluid d-flex align-items-center">
             <img src="./assets/img/logo.png" width="50" alt="" class="me-3">
-            <a class="navbar-brand" href="./index.html">Franco PetShop</a>
+            <a class="navbar-brand" href="#">Franco PetShop</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                 data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
                 aria-label="Toggle navigation">
@@ -31,31 +31,42 @@
                     <li class="nav-item">
                         <a class="nav-link" aria-current="page" href="./index.html">Home</a>
                     </li>
-
-                <li class="nav-item dropdown">
-                    <a
-                    class="nav-link dropdown-toggle"
-                    href="#"
-                    id="navbarDropdown"
-                    role="button"
-                    data-bs-toggle="dropdown"
-                    aria-expanded="false"
-                    >
-                    Shop
-                    </a>
-                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <li><a class="dropdown-item" href="./juguetes.html">Juguetes</a></li>
-                    <li><a class="dropdown-item" href="./farmacia.html">Farmacia</a></li>
-                    </ul>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="./contacto.html">Contacto</a>
-                </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                            data-bs-toggle="dropdown" aria-expanded="false">
+                            Shop
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <li><a class="dropdown-item" href="./juguetes.html">Juguetes</a></li>
+                            <li><a class="dropdown-item" href="./farmacia.html">Farmacia</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="./contacto.html">Contacto</a>
+                    </li>
+                    <li class="d-md-none d-sm-block">
+                        <a href="./carrito.html"><i class="uil uil-shopping-cart cart fs-1 text-white"></i></a>
+                    </li>
+                    <li>
+                        <div class="pe-5 my-3 d-sm-block d-lg-none">
+                            <a type="button" href="./carrito.html" class="btn position-relative bg-white-custom bg-naranja">
+                                <i class="uil uil-shopping-cart fs-2 text-azul"></i>
+                                <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger fs-6">
+                                    <span id="cantidad-carrito">0</span>
+                                </span>
+                              </a>
+                        </div>
+                    </li>
                 </ul>
             </div>
         </div>
-        <div class="pe-5 d-md-block d-sm-none">
-            <a href="./carrito.html"><i class="d-none d-lg-block uil uil-shopping-cart cart fs-1 text-white"></i></a>
+        <div class="pe-5 my-3 d-sm-none d-lg-block">
+            <a type="button" href="./carrito.html" class="btn position-relative bg-white-custom bg-naranja">
+                <i class="uil uil-shopping-cart fs-2 text-azul"></i>
+                <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger fs-6">
+                    <span id="cantidad-carrito">0</span>
+                </span>
+              </a>
         </div>
     </nav>
     <header class="bg-white">
