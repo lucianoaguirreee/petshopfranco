@@ -111,7 +111,7 @@ function agregarDatos(id) {
     tablaArticulos.innerHTML += `<tr>
                                     <td class="product__cart__item">
                                         <div class="product__cart__item__pic">
-                                        <button type="button" id="${elem.id}" class="btn btn-danger eliminar">X</button>
+                                        <a type="button" id="${elem.id}" class="btn btn-danger eliminar">X</a>
                                         </div>
                                         <div class="product__cart__item__pic">
                                             <img class="shopping__cart__table-img" src="${elem.imagen}">
@@ -135,20 +135,30 @@ function agregarDatos(id) {
 }
 agregarDatos("tabla_articulos")
 
-
-
-let eliminar = document.querySelectorAll('.eliminar')
-eliminar.addEventListener("click", eliminaArticulo)
 console.log(dataStorage)
-function eliminaArticulo(){
- console.log('click')
+
+let tabla_articulos = document.querySelector('#tabla_articulos')
+
+tabla_articulos.addEventListener('click', eliminarArticulos)
+
+function eliminarArticulos(e) {
+  if (e.target.classList.contains("eliminar")) {
+    console.log(e.target)
+  }
+}
+
+// function eliminaArticulo(e){
+
+  // console.log(e.target)
+
   // let index = dataStorage.findIndex(el=> el.id == e.target.id)
   // dataStorage.splice(index, 1)
   // console.log(index)
   // console.log(e.target.id)
   // let r = dataStorage.indexOf(e.target.id)
   // console.log(r)
-}
+// }
 
-
-
+// function eliminarArticulo(e) {
+  
+// }
