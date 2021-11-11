@@ -111,15 +111,12 @@ let dataStorage = traerDatos("datosGuardados")
 let cantidadTotal
 
 function imprimirDatos(array, id) {
-  let tablaArticulos = document.querySelector(`#${id}`)
+  let tablaArticulos = document.querySelector(`#${id} tbody`)
   tablaArticulos.innerHTML = " "
   if(array.length != 0){
     array.forEach((elem) => {
      tablaArticulos.innerHTML += `<tr>
                                      <td class="product__cart__item">
-                                         <div class="product__cart__item__pic">
-                                         <a type="button" id="${elem.id}" class="btn btn-danger eliminar">X</a>
-                                         </div>
                                          <div class="product__cart__item__pic">
                                              <img class="shopping__cart__table-img" src="${elem.imagen}">
                                          </div>
@@ -137,7 +134,12 @@ function imprimirDatos(array, id) {
                                          </div>
                                      </td>
                                      <td id="ccu-total" class="cart__price">$ ${elem.precio}</td>
-                                  </tr>`
+                                      <td>
+                                         <a type="button" id="${elem.id}" class="badge bg-danger rounded-pill fs-6 text-decoration-none eliminar">&times;</a>
+                                      </td>
+  
+
+                                     </tr>`
    })
   }else{
     tablaArticulos.innerHTML = `<h2>No existen articulos en el carrito....</h2>`
@@ -153,21 +155,75 @@ function eliminarArticulos(e) {
     let index = dataStorage.findIndex(el=> el.id == e.target.id)
     dataStorage.splice(index, 1)
     localStorage.setItem("datosGuardados", JSON.stringify(dataStorage))
-    imprimirDatos(dataStorage, "tabla_articulos")    
+    imprimirDatos(dataStorage, "tabla_articulos")
+    // spam.innerText = ""    
+    datosTotales(dataStorage)
   }
+
 }
 
 function datosTotales(){
   let datos = localStorage.getItem("datosGuardados") 
-  let cantidadTotal = 0
+  cantidadTotal = 0
   if(datos){
     let data = JSON.parse(datos)
     data.forEach(elem => {
-      cantidadTotal += parseInt(elem.cantidad) * parseInt(elem.precio) 
+      cantidadTotal += parseInt(elem.cantidad) * parseInt(elem.precio)
+// console.log(cantidadTotal)      
     })
   }
-  let spam = document.querySelector('#total')
-  spam.innerText = cantidadTotal
+  let spam = document.querySelector('#subtotal')
+  let costoEnvio = document.querySelector('#costoEnvio')
+  let codigoCupon = document.querySelector('#codigoCupon')
+  let total = document.querySelector('#total')
+  let envio = 1000
+    if(cantidadTotal != 0){
+    spam.innerText = `$ ${cantidadTotal}`
+    costoEnvio.innerText = `$ ${envio}`
+    total.innerText = `$ ${(cantidadTotal + envio)}` 
+    codigoCupon.innerText = `$ ${0}`
+  }else{
+    total.innerText = `$ ${0}`
+    cantidadTotal = 0
+    costoEnvio.innerText = `$ ${0}`
+    spam.innerText = `$ ${cantidadTotal}`
+  }
 }
 datosTotales(dataStorage)
+
+let arrayCupon = ['franco', 'grupo5', 'mindhub']
+
+let inputCupon = document.querySelector('#cupon')
+let botonCupon = document.querySelector('.btn-cupon')
+
+botonCupon.addEventListener('click', e => {
+  e.preventDefault()
+  if(arrayCupon.includes(inputCupon.value)){
+    envio = 500
+    // console.log(cantidadTotal)
+    total.innerText = `$ ${(cantidadTotal + 500)}` 
+    costoEnvio.innerText = `$ ${envio}`
+    codigoCupon.innerText =  `$ ${envio}`
+  }else{
+
+  }
+})
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
