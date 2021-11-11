@@ -8,14 +8,28 @@ fetch(endPoint)
   .then((res) => res.json())
   .then((data) => {
     dataTipos = data.response;
-    arregloProductos = dataTipos.map((elem) => {
-      let procesado = {
-        id: elem._id,
-        nombre: elem.nombre,
-        precio: elem.precio,
-        imagen: elem.imagen,
-      };
-      return procesado
+    dataTipos.forEach((elem) => {
+      if (elem.tipo == tipo) {
+        cardElement.innerHTML += `<div class="col-6 p-2">
+        <div class="card w-100 border border-primary d-flex align-items-center justify-content-evenly flex-column card-size">
+            <img class="lazyloaded img-producto img-fluid"
+                src="${elem.imagen}"
+                alt="${elem.nombre}">
+            <div class="d-flex flex-column justify-content-evenly">
+                <h5 class="card-title fw-bold text-center nombre">${elem.nombre}</h5>
+                <p class="card-text text-center precio fw-bold">$ ${elem.precio}</p>
+                <div class="text-center pb-3">
+                    <label for="price" class="cantidad">Cantidad: </label>
+                    <input id="cantidad-${elem._id}" class="text-center" type="number" name="cantidad-id"
+                        min="1" max="${elem.stock}" step="1" value="1">
+                </div>
+                <div class="d-flex align-items-center justify-content-center">
+                  <a id="${elem._id}" class="boton-comprar btn btn-primary bg-custom mb-3">Agregar al carrito</a>
+                </div>
+            </div>
+        </div>
+    </div>`;
+      }
     });
 
     if (document.title === 'PetShop | Juguetes' || document.title === 'PetShop | Farmacia') {
