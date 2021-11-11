@@ -3,7 +3,7 @@
 let dataTipos = []
 let tipo = document.querySelector(".farmacia") ? "Medicamento" : "Juguete"
 let endPoint = `https://apipetshop.herokuapp.com/api/articulos`
-
+let carritoNumero = document.querySelector('#cantidad-carrito')
 let arregloProductos = [];
 let cardElement = document.querySelector("#container-productos")
 fetch(endPoint)
@@ -137,18 +137,18 @@ function guardaDatos(id) {
     let yaEsta = false
     newData.forEach(elem => {
       elem.cantidad = parseInt(elem.cantidad)
-      if(elem.id === data[0].id){
+      if (elem.id === data[0].id) {
         yaEsta = true
         elem.cantidad += data[0].cantidad 
         elem.stock -= data[0].cantidad 
       }
 
     })
-    if(yaEsta){
+    if (yaEsta) {
       data = newData
-    }else{
+    } else {
       newData.forEach((elem) => data.push(elem))
-    } 
+    }
     localStorage.setItem("datosGuardados", JSON.stringify(data))
   }
 }
@@ -186,7 +186,10 @@ function agregarAlCarrito(e) {
     }
     guardaDatos(e.target.id)
     datosTotales(dataStorage)
+    imprimirCantidad()
   }
+
+
 }
 
 function traerDatos(key) {
@@ -196,6 +199,40 @@ function traerDatos(key) {
 
 let dataStorage = traerDatos("datosGuardados")
 let cantidadTotal
+let dataStorage = traerDatos("datosGuardados") || []
+
+function agregarDatos(id) {
+  let tablaArticulos = document.querySelector(`#${id}`)
+  if (tablaArticulos) {
+    dataStorage.forEach((elem) => {
+      tablaArticulos.innerHTML += `<tr>
+                                      <td class="product__cart__item">
+                                          <div class="product__cart__item__pic">
+                                          <a type="button" id="${elem.id}" class="btn btn-danger eliminar">X</a>
+                                          </div>
+                                          <div class="product__cart__item__pic">
+                                              <img class="shopping__cart__table-img" src="${elem.imagen}">
+                                          </div>
+                                          <div class="product__cart__item__text">
+                                              <h6>${elem.nombre}</h6>
+                                              <h5 id="id">$ ${elem.precio}</h5>
+                                          </div>
+                                      </td>
+                                      <td class="quantity__item">
+                                          <div class="quantity">
+                                              <div class="pro-qty-2">
+                                              <input id="cantidad-${elem._id}" class="text-center" type="number" name="cantidad-id"
+                                              min="1" max="${elem.stock}" step="1" value="${elem.cantidad}">
+                                                              </div>
+                                          </div>
+                                      </td>
+                                      <td id="ccu-total" class="cart__price">$ ${elem.precio}</td>
+                                   </tr>`
+    })
+  }
+
+}
+agregarDatos("tabla_articulos")
 
 function imprimirDatos(array, id) {
   let tablaArticulos = document.querySelector(`#${id} tbody`)
@@ -236,6 +273,29 @@ imprimirDatos(dataStorage,"tabla_articulos")
 
 let tabla_articulos = document.querySelector('#tabla_articulos')
 tabla_articulos.addEventListener('click', eliminarArticulos)
+
+
+
+if (document.title === 'PetShop | Carrito') {
+  tabla_articulos.addEventListener('click', eliminarArticulos)
+
+  let comprar = document.querySelector('#comprar')
+
+  comprar.addEventListener('click', () => {
+    Swal.fire(
+      'Compra finalizada!',
+      'Gracias por su compra!',
+      'success'
+    )
+
+    tabla_articulos = ""
+
+  })
+
+  // contar()
+
+  imprimirCantidad()
+}
 
 function eliminarArticulos(e) {
   if (e.target.classList.contains("eliminar")) {
@@ -296,21 +356,15 @@ botonCupon.addEventListener('click', e => {
   }
 })
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+function imprimirCantidad() {
+  let datos = localStorage.getItem("datosGuardados")
+  let cantidad = 0
+  if (datos) {
+    let data = JSON.parse(datos)
+    data.forEach((elem) => {
+      cantidad += parseInt(elem.cantidad)
+    })
+  }
+  let cantidadDOM = document.querySelector('#cantidad-carrito')
+  cantidadDOM.innerText = cantidad
+}

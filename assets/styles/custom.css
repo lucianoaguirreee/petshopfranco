@@ -14,6 +14,18 @@
   background-color: var(--color2);
 }
 
+.bg-naranja {
+  background-color: var(--color1);
+}
+
+.text-azul {
+  color: var(--color2);
+}
+
+.bg-white-custom:hover {
+  background-color: white;
+}
+
 .boton-comprar {
   background-color: var(--color2);
   width: 200px;
@@ -401,3 +413,4 @@ ul {
 textarea {
   max-height: 150px;
 }
+
