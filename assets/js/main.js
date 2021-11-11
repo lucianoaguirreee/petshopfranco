@@ -9,18 +9,18 @@ let cardElement = document.querySelector("#container-productos");
 fetch(endPoint)
   .then((res) => res.json())
   .then((data) => {
-      dataTipos = data.response;
-      console.log("el arreglo es:")
-      console.log(dataTipos)
-      console.log("el arreglo fue.")
-let cardElement = document.querySelector("#container-productos")
-fetch(endPoint)
-  .then((res) => res.json())
-  .then((data) => {
     dataTipos = data.response;
-    dataTipos.forEach((elem) => {
-      if (elem.tipo == tipo) {
-        cardElement.innerHTML += `<div class="col-6 p-2">
+    console.log("el arreglo es:")
+    console.log(dataTipos)
+    console.log("el arreglo fue.")
+    let cardElement = document.querySelector("#container-productos")
+    fetch(endPoint)
+      .then((res) => res.json())
+      .then((data) => {
+        dataTipos = data.response;
+        dataTipos.forEach((elem) => {
+          if (elem.tipo == tipo) {
+            cardElement.innerHTML += `<div class="col-6 p-2">
         <div class="card w-100 border border-primary d-flex align-items-center justify-content-evenly flex-column card-size">
             <img class="lazyloaded img-producto img-fluid"
                 src="${elem.imagen}"
@@ -39,43 +39,43 @@ fetch(endPoint)
             </div>
         </div>
     </div>`;
-      }
-    });
+          }
+        });
 
-      let datosGuardados = localStorage.getItem("datosGuardados")
+        let datosGuardados = localStorage.getItem("datosGuardados")
 
-      arregloProductos = dataTipos.map(elem => {
-        let newStock = parseInt(elem.stock)
-        if (datosGuardados !== null) {
-          let newData = JSON.parse(datosGuardados)
-          newData.forEach(elemStorage => {
-            if(elemStorage.id === elem._id){
-              newStock = elemStorage.stock
-            }
-          })
-        }
-        let procesado = {
-          _id: elem._id,
-          nombre: elem.nombre,
-          precio: elem.precio,
-          imagen: elem.imagen,
-          stock: newStock,
-          tipo: elem.tipo
-        };
-        return procesado;
-      });
+        arregloProductos = dataTipos.map(elem => {
+          let newStock = parseInt(elem.stock)
+          if (datosGuardados !== null) {
+            let newData = JSON.parse(datosGuardados)
+            newData.forEach(elemStorage => {
+              if (elemStorage.id === elem._id) {
+                newStock = elemStorage.stock
+              }
+            })
+          }
+          let procesado = {
+            _id: elem._id,
+            nombre: elem.nombre,
+            precio: elem.precio,
+            imagen: elem.imagen,
+            stock: newStock,
+            tipo: elem.tipo
+          };
+          return procesado;
+        });
 
-      if (document.title === 'PetShop | Juguetes' || document.title === 'PetShop | Farmacia') {
-        console.log("===dataTipos==")
-        console.log(dataTipos)
-        console.log("===arregloProductos==")
-        console.log(arregloProductos)
-        console.log("=====")
-        arregloProductos.forEach((elem) => {
-          if (elem.tipo == tipo) {
-            
-            if (elem.stock === 0) {
-              cardElement.innerHTML += `<div class="col-4 p-2">
+        if (document.title === 'PetShop | Juguetes' || document.title === 'PetShop | Farmacia') {
+          console.log("===dataTipos==")
+          console.log(dataTipos)
+          console.log("===arregloProductos==")
+          console.log(arregloProductos)
+          console.log("=====")
+          arregloProductos.forEach((elem) => {
+            if (elem.tipo == tipo) {
+
+              if (elem.stock === 0) {
+                cardElement.innerHTML += `<div class="col-4 p-2">
                 <div class="card w-100 p-6 d-flex align-items-center justify-content-evenly flex-column card-border border-2 card-size">
                     <img class="lazyloaded img-producto"
                         src="${elem.imagen}"
@@ -93,8 +93,8 @@ fetch(endPoint)
                     </div>
                 </div>
               </div>`;
-            } else {
-              cardElement.innerHTML += `<div class="col-4 p-2">
+              } else {
+                cardElement.innerHTML += `<div class="col-4 p-2">
                 <div class="card w-100 p-6 d-flex align-items-center justify-content-evenly flex-column card-border border-2 card-size">
                     <img class="lazyloaded img-producto"
                         src="${elem.imagen}"
@@ -113,81 +113,81 @@ fetch(endPoint)
                     </div>
                 </div>
               </div>`;
+              }
+
             }
-  
-          }
-        });
-      }
-  })
-  .catch((err) => console.error(err))
+          });
+        }
+      })
+      .catch((err) => console.error(err))
 
-function guardaDatos(id) {
-  
-  let nombre_producto;
-  let precio_producto;
-  let nombre_imagen;
+    function guardaDatos(id) {
 
-  let str = "cantidad-" + id
-  let qty = parseInt(document.getElementById(str).value)
-
-  arregloProductos.forEach((elem) => {
-    if (elem._id === id) {
-      nombre_producto = elem.nombre;
-      precio_producto = elem.precio;
-      nombre_imagen = elem.imagen;
-
-      elem.stock -= qty;
-      varStockGlobal = elem.stock;
-    }
-  });
-  
-  let data = [
-    {
-      id,
-      cantidad: qty,
       let nombre_producto;
       let precio_producto;
       let nombre_imagen;
 
-  arregloProductos.forEach((elem) => {
-    if (elem.id === id) {
-      nombre_producto = elem.nombre
-      precio_producto = elem.precio
-      nombre_imagen = elem.imagen
-    }
-  });
-    let data = [
-    {
-      id,
-      cantidad: parseInt(document.getElementById("cantidad-"+id).value),
-      nombre: nombre_producto,
-      precio: precio_producto,
-      imagen: nombre_imagen,
-      stock: varStockGlobal
-    },
-  ]
-  let datosGuardados = localStorage.getItem("datosGuardados")
-  if (datosGuardados === null) {
-    localStorage.setItem("datosGuardados", JSON.stringify(data))
-  } else {
-    let newData = JSON.parse(datosGuardados)
-    let yaEsta = false
-    newData.forEach(elem => {
-      elem.cantidad = parseInt(elem.cantidad)
-      if(elem.id === data[0].id){
-        yaEsta = true
-        elem.cantidad += data[0].cantidad 
-        elem.stock -= data[0].cantidad 
-      }
+      let str = "cantidad-" + id
+      let qty = parseInt(document.getElementById(str).value)
 
-    })
-    if(yaEsta){
-      data = newData
-    }else{
-      newData.forEach((elem) => data.push(elem))
-    } 
-    localStorage.setItem("datosGuardados", JSON.stringify(data))
+      arregloProductos.forEach((elem) => {
+        if (elem._id === id) {
+          nombre_producto = elem.nombre;
+          precio_producto = elem.precio;
+          nombre_imagen = elem.imagen;
+
+          elem.stock -= qty;
+          varStockGlobal = elem.stock;
+        }
+      });
+
+      let data = [
+        {
+          id,
+          cantidad: qty,
+          nombre_producto,
+          precio_producto,
+          nombre_imagen,
+
+          arregloProductos.forEach((elem) => {
+            if (elem.id === id) {
+              nombre_producto = elem.nombre
+              precio_producto = elem.precio
+              nombre_imagen = elem.imagen
+            }
+          })
+    let data =[
+            {
+              id,
+              cantidad: parseInt(document.getElementById("cantidad-" + id).value),
+              nombre: nombre_producto,
+              precio: precio_producto,
+              imagen: nombre_imagen,
+              stock: varStockGlobal
+            },
+          ]
+  let datosGuardados = localStorage.getItem("datosGuardados")
+  if(datosGuardados === null) {
+  localStorage.setItem("datosGuardados", JSON.stringify(data))
+} else {
+  let newData = JSON.parse(datosGuardados)
+  let yaEsta = false
+  newData.forEach(elem => {
+    elem.cantidad = parseInt(elem.cantidad)
+    if (elem.id === data[0].id) {
+      yaEsta = true
+      elem.cantidad += data[0].cantidad
+      elem.stock -= data[0].cantidad
+    }
+
+  })
+  if (yaEsta) {
+    data = newData
+  } else {
+    newData.forEach((elem) => data.push(elem))
   }
+  localStorage.setItem("datosGuardados", JSON.stringify(data))
+}
 }
 
 if (document.title != "PetShop | Carrito") {
@@ -196,28 +196,27 @@ if (document.title != "PetShop | Carrito") {
 
 function agregarAlCarrito(e) {
   if (e.target.classList.contains("boton-comprar")) {
-    
-    if (document.getElementById("cantidad-"+e.target.id))
-    {
-        guardaDatos(e.target.id);
 
-        //Descuenta cantidad al max value
-        let divCantidadId = "div-cantidad-"+e.target.id
-        console.log(divCantidadId)
-        let divCantidadProd = document.getElementById(divCantidadId)
-        
-        if (varStockGlobal === 0) {
-          divCantidadProd.innerHTML = `
+    if (document.getElementById("cantidad-" + e.target.id)) {
+      guardaDatos(e.target.id);
+
+      //Descuenta cantidad al max value
+      let divCantidadId = "div-cantidad-" + e.target.id
+      console.log(divCantidadId)
+      let divCantidadProd = document.getElementById(divCantidadId)
+
+      if (varStockGlobal === 0) {
+        divCantidadProd.innerHTML = `
           <label for="price" class="cantidad">Cantidad: </label>
           <label id="label-${e.target.id}">SIN STOCK </label>
               `;
-        } else {
-          divCantidadProd.innerHTML = `
+      } else {
+        divCantidadProd.innerHTML = `
           <label for="price" class="cantidad">Cantidad: </label>
           <input id="cantidad-${e.target.id}" class="text-center" type="number" name="cantidad-id"
               min="0" max="${varStockGlobal}" step="1" value="0">
               `;
-        }
+      }
     }
   }
 }
