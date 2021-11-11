@@ -50,8 +50,13 @@
                 </ul>
             </div>
         </div>
-        <div class="pe-5 d-md-block d-sm-none">
-            <a href="./carrito.html"><i class="uil uil-shopping-cart cart fs-1 text-white"></i></a>
+        <div class="pe-5 my-3">
+            <a type="button" href="./carrito.html" class="btn position-relative bg-white-custom bg-naranja">
+                <i class="uil uil-shopping-cart fs-2 text-azul"></i>
+                <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger fs-6">
+                    <span id="cantidad-carrito">0</span>
+                </span>
+              </a>
         </div>
     </nav>
     <header class="">
@@ -66,7 +71,7 @@
                 <div class="row">
                     <div class="col-lg-8">
                         <div class="shopping__cart__table">
-                            <table>
+                            <table id="tabla_articulos">
                                 <thead>
                                     <tr>
                                         <th>Producto</th>
@@ -75,7 +80,7 @@
                                     </tr>
                                 </thead>
                                 <tbody id="items">
-                                    <tr>
+                                    <!-- <tr>
                                         <td class="product__cart__item">
                                             <div class="product__cart__item__pic">
                                                 <img class="shopping__cart__table-img" src="./assets/img/IMG_3516.jpg">
@@ -93,7 +98,7 @@
                                             </div>
                                         </td>
                                         <td id="ccu-total" class="cart__price">$ 000</td>
-                                    </tr>
+                                    </tr> -->
                                 </tbody>
                             </table>
                         </div>
@@ -114,7 +119,7 @@
                                 <li class="fw-bold">Cupon de descuento <span id="codigoCupon">$ X</span></li>
                                 <li class="fw-bold">Total <span id="total">$ X</span></li>
                             </ul>
-                            <a href="#" class="primary-btn fw-bolder">Continuar</a>
+                            <a href="#" class="primary-btn fw-bolder" id="comprar">Finalizar compra</a>
                         </div>
                     </div>
                 </div>
@@ -143,6 +148,10 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
         crossorigin="anonymous"></script>
+        <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+        <script src="./assets/js/main.js"></script>
+   
 </body>
 
 </html>
