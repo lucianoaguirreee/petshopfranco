@@ -44,11 +44,7 @@ fetch(endPoint)
       });
 
       if (document.title === 'PetShop | Juguetes' || document.title === 'PetShop | Farmacia') {
-        // console.log("===dataTipos==")
-        // console.log(dataTipos)
-        // console.log("===arregloProductos==")
-        // console.log(arregloProductos)
-        // console.log("=====")
+        
         arregloProductos.forEach((elem) => {
           if (elem.tipo == tipo) {
             
@@ -166,7 +162,7 @@ function agregarAlCarrito(e) {
 
         //Descuenta cantidad al max value
         let divCantidadId = "div-cantidad-"+e.target.id
-        // console.log(divCantidadId)
+        console.log(divCantidadId)
         let divCantidadProd = document.getElementById(divCantidadId)
         
         if (varStockGlobal === 0) {
@@ -185,7 +181,7 @@ function agregarAlCarrito(e) {
         }
       }
       guardaDatos(e.target.id)
-      // datosTotales(dataStorage)
+      datosTotales(dataStorage)
       imprimirCantidad()
   }
 
@@ -324,18 +320,22 @@ function datosTotales(){
 
 
 
-let cantidadDOM = document.querySelector('#cantidad-carrito')
+let arrayCupon = ['franco', 'grupo5', 'mindhub']
+
+let inputCupon = document.querySelector('#cupon')
+let botonCupon = document.querySelector('.btn-cupon')
+
+
+
 function imprimirCantidad() {
-
-  console.log('llegue');
-
   let datos = localStorage.getItem("datosGuardados")
   let cantidad = 0
   if (datos) {
     let data = JSON.parse(datos)
     data.forEach((elem) => {
-      cantidad += Number(elem.cantidad)
+      cantidad += parseInt(elem.cantidad)
     })
   }
+  let cantidadDOM = document.querySelector('#cantidad-carrito')
   cantidadDOM.innerText = cantidad
 }
