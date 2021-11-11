@@ -59,7 +59,7 @@ fetch(endPoint)
                           <label id="label-${elem._id}">SIN STOCK </label>
                         </div>
                         <div class="d-flex align-items-center justify-content-center">
-                          <a id="${elem._id}" class="btn btn-primary bg-primary mb-3">Sin Stock</a>
+                        <button id="${elem._id}" class="boton-comprar btn btn-primary bg-custom mb-3" disabled>Agregar al carrito</button>
                         </div>
                     </div>
                 </div>
@@ -79,7 +79,7 @@ fetch(endPoint)
                                 min="0" max="${elem.stock}" step="1" value="1">
                         </div>
                         <div class="d-flex align-items-center justify-content-center">
-                          <a id="${elem._id}" class="boton-comprar btn btn-primary bg-custom mb-3">Agregar al carrito</a>
+                          <button id="${elem._id}" class="boton-comprar btn btn-primary bg-custom mb-3">Agregar al carrito</button>
                         </div>
                     </div>
                 </div>
@@ -167,12 +167,14 @@ function agregarAlCarrito(e) {
           <label for="price" class="cantidad">Cantidad: </label>
           <label id="label-${e.target.id}">SIN STOCK </label>
               `;
+          document.getElementById(e.target.id).disabled = true;
         } else {
           divCantidadProd.innerHTML = `
           <label for="price" class="cantidad">Cantidad: </label>
           <input id="cantidad-${e.target.id}" class="text-center" type="number" name="cantidad-id"
               min="0" max="${varStockGlobal}" step="1" value="0">
               `;
+          document.getElementById(e.target.id).disabled = false;
         }
     }
   }
