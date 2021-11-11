@@ -6,6 +6,14 @@ let endPoint = `https://apipetshop.herokuapp.com/api/articulos`
 let carritoNumero = document.querySelector('#cantidad-carrito')
 let arregloProductos = [];
 let cardElement = document.querySelector("#container-productos")
+let cantidad = 0
+let spam = document.querySelector('#subtotal')
+let costoEnvio = document.querySelector('#costoEnvio')
+let codigoCupon = document.querySelector('#codigoCupon')
+let total = document.querySelector('#total')
+let envio = 1000
+let cantidadDOM = document.querySelector('#cantidad-carrito')
+
 fetch(endPoint)
   .then((res) => res.json())
   .then((data) => {
@@ -20,36 +28,36 @@ fetch(endPoint)
       return procesado
     });
 
-      let datosGuardados = localStorage.getItem("datosGuardados")
+    let datosGuardados = localStorage.getItem("datosGuardados")
 
-      arregloProductos = dataTipos.map(elem => {
-        let newStock = parseInt(elem.stock)
-        if (datosGuardados !== null) {
-          let newData = JSON.parse(datosGuardados)
-          newData.forEach(elemStorage => {
-            if(elemStorage.id === elem._id){
-              newStock = elemStorage.stock
-            }
-          })
-        }
-        let procesado = {
-          _id: elem._id,
-          nombre: elem.nombre,
-          precio: elem.precio,
-          imagen: elem.imagen,
-          stock: newStock,
-          tipo: elem.tipo
-        };
-        return procesado;
-      });
+    arregloProductos = dataTipos.map(elem => {
+      let newStock = parseInt(elem.stock)
+      if (datosGuardados !== null) {
+        let newData = JSON.parse(datosGuardados)
+        newData.forEach(elemStorage => {
+          if (elemStorage.id === elem._id) {
+            newStock = elemStorage.stock
+          }
+        })
+      }
+      let procesado = {
+        _id: elem._id,
+        nombre: elem.nombre,
+        precio: elem.precio,
+        imagen: elem.imagen,
+        stock: newStock,
+        tipo: elem.tipo
+      };
+      return procesado;
+    });
 
-      if (document.title === 'PetShop | Juguetes' || document.title === 'PetShop | Farmacia') {
-        
-        arregloProductos.forEach((elem) => {
-          if (elem.tipo == tipo) {
-            
-            if (elem.stock === 0) {
-              cardElement.innerHTML += `<div class="col-4 p-2">
+    if (document.title === 'PetShop | Juguetes' || document.title === 'PetShop | Farmacia') {
+
+      arregloProductos.forEach((elem) => {
+        if (elem.tipo == tipo) {
+
+          if (elem.stock === 0) {
+            cardElement.innerHTML += `<div class="col-4 p-2">
                 <div class="card w-100 p-6 d-flex align-items-center justify-content-evenly flex-column card-border border-2 card-size">
                     <img class="lazyloaded img-producto"
                         src="${elem.imagen}"
@@ -67,8 +75,8 @@ fetch(endPoint)
                     </div>
                 </div>
               </div>`;
-            } else {
-              cardElement.innerHTML += `<div class="col-4 p-2">
+          } else {
+            cardElement.innerHTML += `<div class="col-4 p-2">
                 <div class="card w-100 p-6 d-flex align-items-center justify-content-evenly flex-column card-border border-2 card-size">
                     <img class="lazyloaded img-producto"
                         src="${elem.imagen}"
@@ -88,15 +96,16 @@ fetch(endPoint)
                 </div>
             </div>
         </div>`;
+          }
         }
       }
-      }
-        )}
+      )
+    }
   })
   .catch((err) => console.error(err))
 
 function guardaDatos(id) {
-  
+
   let nombre_producto;
   let precio_producto;
   let nombre_imagen;
@@ -114,7 +123,7 @@ function guardaDatos(id) {
       varStockGlobal = elem.stock;
     }
   });
-  
+
   let data = [
     {
       id,
@@ -126,17 +135,17 @@ function guardaDatos(id) {
     },
   ]
   let datosGuardados = localStorage.getItem("datosGuardados")
-  if(datosGuardados === null){
+  if (datosGuardados === null) {
     localStorage.setItem("datosGuardados", JSON.stringify(data))
-  }else{
+  } else {
     let newData = JSON.parse(datosGuardados)
     let yaEsta = false
     newData.forEach(elem => {
       elem.cantidad = parseInt(elem.cantidad)
       if (elem.id === data[0].id) {
         yaEsta = true
-        elem.cantidad += data[0].cantidad 
-        elem.stock -= data[0].cantidad 
+        elem.cantidad += data[0].cantidad
+        elem.stock -= data[0].cantidad
       }
 
     })
@@ -155,34 +164,37 @@ if (document.title != "PetShop | Carrito") {
 
 function agregarAlCarrito(e) {
   if (e.target.classList.contains("boton-comprar")) {
-    
-    if (document.getElementById("cantidad-"+e.target.id)) {
 
-        guardaDatos(e.target.id);
+    if (document.getElementById("cantidad-" + e.target.id)) {
 
-        //Descuenta cantidad al max value
-        let divCantidadId = "div-cantidad-"+e.target.id
-        console.log(divCantidadId)
-        let divCantidadProd = document.getElementById(divCantidadId)
-        
-        if (varStockGlobal === 0) {
-          divCantidadProd.innerHTML = `
+      guardaDatos(e.target.id);
+
+      //Descuenta cantidad al max value
+      let divCantidadId = "div-cantidad-" + e.target.id
+      // console.log(divCantidadId)
+      let divCantidadProd = document.getElementById(divCantidadId)
+
+      if (varStockGlobal === 0) {
+        divCantidadProd.innerHTML = `
           <label for="price" class="cantidad">Cantidad: </label>
           <label id="label-${e.target.id}">SIN STOCK </label>
               `;
-          document.getElementById(e.target.id).disabled = true;
-        } else {
-          divCantidadProd.innerHTML = `
+        document.getElementById(e.target.id).disabled = true;
+      } else {
+        divCantidadProd.innerHTML = `
           <label for="price" class="cantidad">Cantidad: </label>
           <input id="cantidad-${e.target.id}" class="text-center" type="number" name="cantidad-id"
               min="0" max="${varStockGlobal}" step="1" value="0">
               `;
-          document.getElementById(e.target.id).disabled = false;
-        }
+        document.getElementById(e.target.id).disabled = false;
       }
-      guardaDatos(e.target.id)
-      datosTotales(dataStorage)
-      imprimirCantidad()
+
+
+    }
+    guardaDatos(e.target.id)
+    datosTotales(dataStorage)
+    imprimirCantidad()
+
   }
 
 
@@ -195,13 +207,13 @@ function traerDatos(key) {
 
 let cantidadTotal
 let dataStorage = traerDatos("datosGuardados") || []
-
+let div = document.querySelector('#alerta')
 function imprimirDatos(array, id) {
   let tablaArticulos = document.querySelector(`#${id} tbody`)
   tablaArticulos.innerHTML = " "
-  if(array.length != 0){
+  if (array.length != 0) {
     array.forEach((elem) => {
-     tablaArticulos.innerHTML += `<tr>
+      tablaArticulos.innerHTML += `<tr>
                                      <td class="product__cart__item">
                                          <div class="product__cart__item__pic">
                                              <img class="shopping__cart__table-img" src="${elem.imagen}">
@@ -226,9 +238,9 @@ function imprimirDatos(array, id) {
   
 
                                      </tr>`
-   })
-  }else{
-    let div = document.querySelector('#alerta')
+    })
+  } else {
+
     div.innerHTML = `<div class="alert alert-info text-center" role="alert">
     No agregaste nada al carrito ...
   </div>`
@@ -243,42 +255,63 @@ if (document.title === 'PetShop | Carrito') {
 
   let comprar = document.querySelector('#comprar')
 
-  comprar.addEventListener('click', () => {
+  comprar.addEventListener('click', (e) => {
+
+    e.preventDefault()
+
     Swal.fire(
       'Compra finalizada!',
       'Gracias por su compra!',
       'success'
     )
+    
+    total.innerText = `$ ${0}`
+    cantidadTotal = 0
+    costoEnvio.innerText = `$ ${0}`
+    spam.innerText = `$ ${cantidadTotal}`
 
-    tabla_articulos = ""
+    localStorage.removeItem('datosGuardados')
+    let tabla = document.querySelector('#tabla_articulos tbody')
+    tabla.innerHTML = ""
+    div.innerHTML = `<div class="alert alert-info text-center" role="alert">
+    No agregaste nada al carrito ...
+    </div>`
 
   })
 
   // contar()
 
-  imprimirDatos(dataStorage,"tabla_articulos")
+  imprimirDatos(dataStorage, "tabla_articulos")
 
   datosTotales(dataStorage)
-
-  botonCupon.addEventListener('click', e => {
-    e.preventDefault()
-    if(arrayCupon.includes(inputCupon.value)){
-      envio = 500
-      // console.log(cantidadTotal)
-      total.innerText = `$ ${(cantidadTotal + 500)}` 
-      costoEnvio.innerText = `$ ${envio}`
-      codigoCupon.innerText =  `$ ${envio}`
-    }else{
-  
-    }
-  })
+  let botonCupon = document.querySelector('.btn-cupon')
+  if (dataStorage.length >= 1) {
+    botonCupon.addEventListener('click', e => {
+      e.preventDefault()
+      if (arrayCupon.includes(inputCupon.value)) {
+        envio = 500
+        // console.log(cantidadTotal)
+        total.innerText = `$ ${(cantidadTotal + 500)}`
+        costoEnvio.innerText = `$ ${envio}`
+        codigoCupon.innerText = `$ ${envio}`
+      }
+    })
+  } else {
+    botonCupon.addEventListener('click', e => {
+      Swal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        text: 'No puedes agregar cupones con el carrito vacio!'
+      })
+    })
+  }
 
   imprimirCantidad()
 }
 
 function eliminarArticulos(e) {
   if (e.target.classList.contains("eliminar")) {
-    let index = dataStorage.findIndex(el=> el.id == e.target.id)
+    let index = dataStorage.findIndex(el => el.id == e.target.id)
     dataStorage.splice(index, 1)
     localStorage.setItem("datosGuardados", JSON.stringify(dataStorage))
     imprimirDatos(dataStorage, "tabla_articulos")
@@ -289,53 +322,48 @@ function eliminarArticulos(e) {
 
 }
 
-function datosTotales(){
-  let datos = localStorage.getItem("datosGuardados") 
+function datosTotales() {
+  let datos = localStorage.getItem("datosGuardados")
   cantidadTotal = 0
-  if(datos){
+  if (datos) {
     let data = JSON.parse(datos)
     data.forEach(elem => {
-      cantidadTotal += parseInt(elem.cantidad) * parseInt(elem.precio)
-// console.log(cantidadTotal)      
+      cantidadTotal += parseInt(elem.cantidad) * parseInt(elem.precio)   
     })
   }
-  let spam = document.querySelector('#subtotal')
-  let costoEnvio = document.querySelector('#costoEnvio')
-  let codigoCupon = document.querySelector('#codigoCupon')
-  let total = document.querySelector('#total')
-  let envio = 1000
 
-    if(cantidadTotal != 0){
-    spam.innerText = `$ ${cantidadTotal}`
-    costoEnvio.innerText = `$ ${envio}`
-    total.innerText = `$ ${(cantidadTotal + envio)}` 
-    codigoCupon.innerText = `$ ${0}`
-  }else{
-    total.innerText = `$ ${0}`
-    cantidadTotal = 0
-    costoEnvio.innerText = `$ ${0}`
-    spam.innerText = `$ ${cantidadTotal}`
+  if (document.title === 'PetShop | Carrito') {
+    if (cantidadTotal != 0) {
+      spam.innerText = `$ ${cantidadTotal}`
+      costoEnvio.innerText = `$ ${envio}`
+      total.innerText = `$ ${(cantidadTotal + envio)}`
+      codigoCupon.innerText = `$ ${0}`
+    } else {
+      total.innerText = `$ ${0}`
+      cantidadTotal = 0
+      costoEnvio.innerText = `$ ${0}`
+      spam.innerText = `$ ${cantidadTotal}`
+    }
   }
+  
 }
-
-
 
 let arrayCupon = ['franco', 'grupo5', 'mindhub']
 
 let inputCupon = document.querySelector('#cupon')
-let botonCupon = document.querySelector('.btn-cupon')
-
-
 
 function imprimirCantidad() {
+  console.log('entre a la funcion');
   let datos = localStorage.getItem("datosGuardados")
-  let cantidad = 0
+  
   if (datos) {
     let data = JSON.parse(datos)
     data.forEach((elem) => {
       cantidad += parseInt(elem.cantidad)
     })
   }
-  let cantidadDOM = document.querySelector('#cantidad-carrito')
+
   cantidadDOM.innerText = cantidad
 }
+
+imprimirCantidad()
