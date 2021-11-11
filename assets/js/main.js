@@ -193,7 +193,7 @@ function agregarAlCarrito(e) {
     }
     guardaDatos(e.target.id)
     datosTotales(dataStorage)
-    imprimirCantidad()
+    
 
   }
 
@@ -245,7 +245,7 @@ function imprimirDatos(array, id) {
     No agregaste nada al carrito ...
   </div>`
   }
-  imprimirCantidad()
+  
 }
 
 let tabla_articulos = document.querySelector('#tabla_articulos')
@@ -279,8 +279,6 @@ if (document.title === 'PetShop | Carrito') {
 
   })
 
-  // contar()
-
   imprimirDatos(dataStorage, "tabla_articulos")
 
   datosTotales(dataStorage)
@@ -306,7 +304,7 @@ if (document.title === 'PetShop | Carrito') {
     })
   }
 
-  imprimirCantidad()
+  
 }
 
 function eliminarArticulos(e) {
@@ -317,7 +315,7 @@ function eliminarArticulos(e) {
     imprimirDatos(dataStorage, "tabla_articulos")
     // spam.innerText = ""    
     datosTotales(dataStorage)
-    imprimirCantidad()
+    
   }
 
 }
@@ -352,18 +350,6 @@ let arrayCupon = ['franco', 'grupo5', 'mindhub']
 
 let inputCupon = document.querySelector('#cupon')
 
-function imprimirCantidad() {
-  console.log('entre a la funcion');
-  let datos = localStorage.getItem("datosGuardados")
-  
-  if (datos) {
-    let data = JSON.parse(datos)
-    data.forEach((elem) => {
-      cantidad += parseInt(elem.cantidad)
-    })
-  }
+let numeroCarro = document.querySelector('#cantidad')
 
-  cantidadDOM.innerText = cantidad
-}
-
-imprimirCantidad()
+console.log(numeroCarro)
