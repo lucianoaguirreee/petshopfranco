@@ -53,15 +53,15 @@ fetch(endPoint)
       imprimirCantidad()
       arregloProductos.forEach((elem) => {
         if (elem.tipo == tipo) {
-
           if (elem.stock === 0) {
             cardElement.innerHTML += `<div class="col-4 p-2">
                 <div class="card w-100 p-6 d-flex align-items-center justify-content-evenly flex-column card-border border-2 card-size">
                     <img class="lazyloaded img-producto"
                         src="${elem.imagen}"
                         alt="${elem.nombre}">
+                        <p id="alerta-stock-${elem._id}" class="badge bg-white rounded-pill fs-6 text-decoration-none text-white"> - </p>
                     <div class="d-flex flex-column justify-content-evenly">
-                        <h5 class="card-title fw-bold id="nombre-${elem._id}" text-center pt-3 nombre">${elem.nombre}</h5>
+                        <h5 class="card-title fw-bold text-center pt-3 nombre" id="nombre-${elem._id}">${elem.nombre}</h5>
                         <p class="card-text text-center precio fw-bold">$ ${elem.precio}</p>
                         <div id="div-cantidad-${elem._id}" class="text-center pb-3">
                           <label for="price" class="cantidad">Cantidad: </label>
@@ -73,19 +73,43 @@ fetch(endPoint)
                     </div>
                 </div>
               </div>`;
-          } else {
+          } else if (elem.stock < 5) {
             cardElement.innerHTML += `<div class="col-4 p-2">
                 <div class="card w-100 p-6 d-flex align-items-center justify-content-evenly flex-column card-border border-2 card-size">
                     <img class="lazyloaded img-producto"
                         src="${elem.imagen}"
                         alt="${elem.nombre}">
+  
+                        <p id="alerta-stock-${elem._id}" class="badge bg-danger rounded-pill fs-6 text-decoration-none eliminar">Últimas unidades!</p>
                     <div class="d-flex flex-column justify-content-evenly">
                         <h5 class="card-title fw-bold text-center pt-3 nombre" id="nombre-${elem._id}">${elem.nombre}</h5>
                         <p class="card-text text-center precio fw-bold">$ ${elem.precio}</p>
                         <div id="div-cantidad-${elem._id}" class="text-center pb-3">
                             <label for="price" class="cantidad">Cantidad: </label>
                             <input id="cantidad-${elem._id}" class="text-center" type="number" name="cantidad-id"
-                                min="0" max="${elem.stock}" step="1" value="1">
+                                min="1" max="${elem.stock}" step="1" value="1" onKeyDown='return false'>
+                        </div>
+                        <div class="d-flex align-items-center justify-content-center">
+                          <button id="${elem._id}" class="boton-comprar btn btn-primary bg-custom mb-3">Agregar al carrito</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>`;
+          } else {
+            cardElement.innerHTML += `<div class="col-4 p-2">
+                <div class="card w-100 p-6 d-flex align-items-center justify-content-evenly flex-column card-border border-2 card-size">
+                    <img class="lazyloaded img-producto"
+                        src="${elem.imagen}"
+                        alt="${elem.nombre}">
+                        <p id="alerta-stock-${elem._id}" class="badge bg-white rounded-pill fs-6 text-decoration-none text-white"> - </p>
+                    <div class="d-flex flex-column justify-content-evenly">
+                        <h5 class="card-title fw-bold text-center pt-3 nombre" id="nombre-${elem._id}">${elem.nombre}</h5>
+                        <p class="card-text text-center precio fw-bold">$ ${elem.precio}</p>
+                        <div id="div-cantidad-${elem._id}" class="text-center pb-3">
+                            <label for="price" class="cantidad">Cantidad: </label>
+                            <input id="cantidad-${elem._id}" class="text-center" type="number" name="cantidad-id"
+                                min="1" max="${elem.stock}" step="1" value="1" onKeyDown='return false'>
                         </div>
                         <div class="d-flex align-items-center justify-content-center">
                           <button id="${elem._id}" class="boton-comprar btn btn-primary bg-custom mb-3">Agregar al carrito</button>
@@ -176,14 +200,15 @@ function agregarAlCarrito(e) {
       if (varStockGlobal === 0) {
         divCantidadProd.innerHTML = `
           <label for="price" class="cantidad">Cantidad: </label>
-          <label id="label-${e.target.id}">SIN STOCK </label>
+          <label id="label-${e.target.id}" class="nombre">SIN STOCK </label>
               `;
         document.getElementById(e.target.id).disabled = true;
       } else {
         divCantidadProd.innerHTML = `
+        
           <label for="price" class="cantidad">Cantidad: </label>
           <input id="cantidad-${e.target.id}" class="text-center" type="number" name="cantidad-id"
-              min="0" max="${varStockGlobal}" step="1" value="0">
+              min="1" max="${varStockGlobal}" step="1" value="1" onKeyDown='return false'>
               `;
         document.getElementById(e.target.id).disabled = false;
       }
@@ -192,9 +217,9 @@ function agregarAlCarrito(e) {
     }
 
     let nombreItem = `nombre-${e.target.id}`
-    console.log(e.target.id)
+    
     const Toast = Swal.mixin({
-      text: `A custom <span style="color:#F8BB86">html<span> message.`,
+      text: document.getElementById(nombreItem).innerText,
       toast: true,
       position: 'bottom-right',
       showConfirmButton: false,
@@ -244,10 +269,12 @@ function imprimirDatos(array, id) {
                                      </td>
                                      <td class="quantity__item">
                                          <div class="quantity">
-                                             <div class="pro-qty-2">
+                                            <div class="pro-qty-2">
+
                                              <input id="cantidad-${elem._id}" class="text-center" type="number" name="cantidad-id"
-                                             min="1" max="${elem.stock}" step="1" value="${elem.cantidad}">
-                                                             </div>
+                                             min="1" max="${elem.stock}" step="1" value="${elem.cantidad}" onKeyDown='return false' disabled>
+
+                                            </div>
                                          </div>
                                      </td>
                                      <td id="ccu-total" class="cart__price">$ ${elem.precio}</td>
@@ -278,11 +305,15 @@ if (document.title === 'PetShop | Carrito') {
 
     e.preventDefault()
 
-    Swal.fire(
-      'Compra finalizada!',
-      'Gracias por su compra!',
-      'success'
-    )
+    Swal.fire({
+      icon: 'success',
+      title: `<span style="color:#FFF">¡Gracias por su compra!<span>`,
+      text: 'El envio llegara dentro de 3 o 4 días habiles',
+      confirmButtonColor: "#fca922",
+      background: "#098ccf",
+      confirmButtonText: "Continuar",
+      iconColor: "#fca922",
+    })
     
     total.innerText = `$ ${0}`
     cantidadTotal = 0
@@ -296,6 +327,10 @@ if (document.title === 'PetShop | Carrito') {
     No agregaste nada al carrito ...
     </div>`
 
+    let cantidadDOMuno = document.querySelector('#cantidad-carrito1')
+    let cantidadDOMdos = document.querySelector('#cantidad-carrito2')
+    cantidadDOMuno.innerText = 0
+    cantidadDOMdos.innerText = 0
   })
 
   imprimirDatos(dataStorage, "tabla_articulos")
@@ -317,8 +352,12 @@ if (document.title === 'PetShop | Carrito') {
     botonCupon.addEventListener('click', e => {
       Swal.fire({
         icon: 'error',
-        title: 'Oops...',
-        text: 'No puedes agregar cupones con el carrito vacio!'
+        title: `<span style="color:#FFF">Oops...<span>`,
+        text: 'No puedes agregar cupones con el carrito vacio!',
+        confirmButtonColor: "#fca922",
+        background: "#098ccf",
+        confirmButtonText: "Continuar",
+        iconColor: "#fca922",
       })
     })
   }
@@ -342,16 +381,20 @@ function eliminarArticulos(e) {
       position: 'bottom-right',
       showConfirmButton: false,
       timer: 3000,
+      confirmButtonColor: "#098ccf",
+      background: "#098ccf",
+      confirmButtonText: "Continuar",
+      iconColor: "#fca922",
       timerProgressBar: true,
       didOpen: (toast) => {
         toast.addEventListener('mouseenter', Swal.stopTimer)
         toast.addEventListener('mouseleave', Swal.resumeTimer)
       }
     })
-  
+
     Toast.fire({
       icon: 'error',
-      title: 'Articulo eliminado ...'
+      title: `<span style="color:#FFF">Articulo eliminado...<span>`
     })
   }
 

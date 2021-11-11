@@ -432,3 +432,12 @@ textarea {
     display: none;
   }
 }
+
+
+div#swal2-html-container.swal2-html-container {
+  color: #fff;
+}
+
+button#swal2-confirm.swal2-styled.swal2-default-outline {
+  color: var(--color2);
+}
