@@ -548,22 +548,32 @@ inputs.forEach((input) => {
 })
 
 
-form.addEventListener('submit', (e) => {
-  e.preventDefault();
-
-  if(campos['form-name'] && campos['form-email'] && campos['form-number'] & campos['form-subject']){
-      
+if (document.title === 'PetShop | Contacto') {
+  form.addEventListener('submit', (e) => {
+    e.preventDefault();
+  
+    if(campos['form-name'] && campos['form-email'] && campos['form-number'] & campos['form-subject']){
+        
+        Swal.fire({
+          icon: 'success',
+          title: `<span style="color:#FFF">Mensaje enviado<span>`,
+          text: 'Se responderá a la brevedad',
+          confirmButtonColor: "#fca922",
+          background: "#098ccf",
+          confirmButtonText: "Continuar",
+          iconColor: "#fca922",
+        })
+        form.reset();
+    }else{
       Swal.fire({
-        icon: 'success',
-        title: `<span style="color:#FFF">Mensaje enviado<span>`,
-        text: 'Se responderá a la brevedad',
+        icon: 'error',
+        title: `<span style="color:#FFF">Asegurate que este todo en orden<span>`,
+        text: 'Nombre, email, telefono y tu mascota',
         confirmButtonColor: "#fca922",
         background: "#098ccf",
         confirmButtonText: "Continuar",
         iconColor: "#fca922",
       })
-      form.reset();
-  }else{
-      alert('debes ingresar correctamente')
   }
 })
+}
