@@ -181,7 +181,7 @@ function guardaDatos(id) {
   }
 }
 
-if (document.title != "PetShop | Carrito" && document.title != "PetShop | Home") {
+if (document.title != "PetShop | Carrito" && document.title != "PetShop | Home" && document.title != "PetShop | Contacto") {
   cardElement.addEventListener("click", agregarAlCarrito)
   imprimirCantidad()
 }
@@ -505,6 +505,8 @@ const form = document.getElementById('form')
 const inputs = document.querySelectorAll('#form input')
 
 
+
+
 function validarFormulario(e) {
   switch (e.target.name){
       case "form-name":
@@ -550,8 +552,17 @@ form.addEventListener('submit', (e) => {
   e.preventDefault();
 
   if(campos['form-name'] && campos['form-email'] && campos['form-number'] & campos['form-subject']){
+      
+      Swal.fire({
+        icon: 'success',
+        title: `<span style="color:#FFF">Mensaje enviado<span>`,
+        text: 'Se responderá a la brevedad',
+        confirmButtonColor: "#fca922",
+        background: "#098ccf",
+        confirmButtonText: "Continuar",
+        iconColor: "#fca922",
+      })
       form.reset();
-      alert('formulario ingresado con exito')
   }else{
       alert('debes ingresar correctamente')
   }
