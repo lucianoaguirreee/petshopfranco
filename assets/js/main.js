@@ -359,8 +359,31 @@ if (document.title === 'PetShop | Carrito') {
         total.innerText = `$ ${(cantidadTotal + 500)}`
         costoEnvio.innerText = `$ ${envio}`
         codigoCupon.innerText = `$ ${envio}`
+        Swal.fire({
+          icon: 'success',
+          title: `<span style="color:#FFF">Ahorrador!<span>`,
+          text: 'Cupon agregado con exito, se descontaron 500 del envio!',
+          confirmButtonColor: "#fca922",
+          background: "#098ccf",
+          confirmButtonText: "Continuar",
+          iconColor: "#fca922",
+        })
       }
     })
+  } else if (envio === 500) {
+
+    botonCupon.addEventListener('click', () => {
+      Swal.fire({
+        icon: 'warning',
+        title: `<span style="color:#FFF">Oops...<span>`,
+        text: 'Ya tiene agregado un cupon de descuento!',
+        confirmButtonColor: "#fca922",
+        background: "#098ccf",
+        confirmButtonText: "Continuar",
+        iconColor: "#fca922",
+      })
+    })
+
   } else {
     botonCupon.addEventListener('click', () => {
       Swal.fire({
@@ -392,7 +415,7 @@ function eliminarArticulos(e) {
       toast: true,
       position: 'bottom-right',
       showConfirmButton: false,
-      timer: 3000,
+      timer: 1500,
       confirmButtonColor: "#098ccf",
       background: "#098ccf",
       confirmButtonText: "Continuar",
