@@ -19,7 +19,8 @@
 <body>
     <nav class="sticky-top navbar navbar-expand-lg navbar-dark bg-custom">
         <div class="container-fluid d-flex align-items-center">
-            <a href="./index.html" class="text-decoration-none"><img src="./assets/img/logo.png" width="50" alt="" class="me-3"></a>
+            <a href="./index.html" class="text-decoration-none"><img src="./assets/img/logo.png" width="50" alt=""
+                    class="me-3"></a>
             <a class="navbar-brand" href="./index.html">Franco PetShop</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                 data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
@@ -47,9 +48,11 @@
                     </li>
                     <li>
                         <div class="pe-5 my-3 d-sm-block d-md-block d-lg-none ">
-                            <a type="button" href="./carrito.html" class="btn position-relative bg-white-custom bg-naranja">
+                            <a type="button" href="./carrito.html"
+                                class="btn position-relative bg-white-custom bg-naranja">
                                 <i class="uil uil-shopping-cart fs-2 text-azul"></i>
-                                <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger fs-6">
+                                <span
+                                    class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger fs-6">
                                     <span id="cantidad-carrito1" class="carritoCuenta">0</span>
                                 </span>
                             </a>
@@ -119,20 +122,65 @@
             </div>
         </section>
     </main>
-    <footer class="mt-3 ">
+    <footer class="mt-3">
         <div>
-            <div class="d-flex flex-wrap justify-content-between align-items-center py-3 bg-custom">
-                <p class="ps-5 col-md-4 mb-0 text-white">&copy; 2021 | Grupo 5 Inc.</p>
+            <div class="d-flex justify-content-between align-items-center p-3 bg-custom">
+                <!-- Button trigger modal -->
+                <button type="button" class="btn text-white" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                    &copy; 2021 | Grupo 5 Inc.
+                </button>
 
-                <a href="./index.html"
-                    class="col-md-4 d-flex align-items-center justify-content-center mb-3 mb-md-0 me-md-auto link-dark text-decoration-none">
-                    <img src="./assets/img/logo.png" width="50" alt="">
+                <!-- Modal -->
+                <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+                    aria-hidden="true">
+                    <div class="modal modal-alert position-static d-block py-5" tabindex="-1" role="dialog"
+                        id="modalChoice">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content rounded-4 shadow">
+                                <div class="modal-body p-4 text-center">
+                                    <h5 class="mb-2"><a href="https://github.com/lucianhoff/petshopfranco"
+                                            class="text-decoration-none text-black">Grupo 5</a></h5>
+                                    <p class="mb-1"><a href="https://github.com/cristian-desarrollador-reactjs" target="_blank" class="text-decoration-none fs-6">Cristian
+                                            Araya</a></p>
+                                    <p class="mb-1"><a href="https://github.com/nemovps" target="_blank" class="text-decoration-none fs-6">Néstor
+                                            Espinoza</a></p>
+                                    <p class="mb-1"><a href="https://github.com/amparolopez" target="_blank" class="text-decoration-none fs-6">Amparo López</a>
+                                    </p>
+                                    <p class="mb-1"><a href="https://github.com/silc22" target="_blank" class="text-decoration-none fs-6">Silvana
+                                            Cerquatti</a></p>
+                                    <p class="mb-1"><a href="https://github.com/gastonjimenez" target="_blank" class="text-decoration-none fs-6">Gaston
+                                            Jimenez</a></p>
+                                    <p class="mb-1"><a href="https://github.com/LeoFormin1" target="_blank" class="text-decoration-none fs-6">Leonel
+                                            Formini</a></p>
+                                    <p class="mb-1"><a href="https://github.com/sulamittakauffman" target="_blank" class="text-decoration-none fs-6">Sulamitta
+                                            Kauffman</a></p>
+                                    <p class="mb-1"><a href="https://github.com/lucianhoff" target="_blank" class="text-decoration-none fs-6">Luciano
+                                            Aguirre</a></p>
+                                </div>
+                                <div class="modal-footer flex-nowrap p-0">
+
+                                    <a href="https://github.com/lucianhoff/petshopfranco"
+                                        class="btn btn-lg btn-link fs-6 text-decoration-none col-6 m-0 rounded-0"
+                                        target="_blank">Ver GitHub</a>
+
+                                    <a href="./index.html"
+                                        class="btn btn-lg btn-link fs-6 text-decoration-none col-6 m-0 rounded-0 border-right">Volver
+                                        a la pagina</a>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <a href="./index.html">
+                    <img src="./assets/img/logo.png" width="50" alt="" />
                 </a>
 
-                <ul class="nav col-md-4 justify-content-end pe-5">
-                    <li class="nav-item"><a href="#" class="nav-link px-2 text-white">Home</a></li>
-                    <li class="nav-item"><a href="#" class="nav-link px-2 text-white">Juguetes</a></li>
-                    <li class="nav-item"><a href="#" class="nav-link px-2 text-white">Farmacia</a></li>
+                <ul class="nav col-md-4 justify-content-end">
+                    <li class="nav-item"><a href="./index.html" class="nav-link px-2 text-white">Home</a></li>
+                    <li class="nav-item"><a href="./juguetes.html" class="nav-link px-2 text-white">Juguetes</a></li>
+                    <li class="nav-item"><a href="./farmacia.html" class="nav-link px-2 text-white">Farmacia</a></li>
                     <li class="nav-item"><a href="./contacto.html" class="nav-link px-2 text-white">Contacto</a></li>
                 </ul>
             </div>

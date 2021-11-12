@@ -600,3 +600,12 @@ if (document.title === 'PetShop | Contacto') {
   }
 })
 }
+
+
+// MODAL
+
+// let grupo = document.querySelector('#grupo') 
+
+// grupo.addEventListener('click', () => {
+
+// })
