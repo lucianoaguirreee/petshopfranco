@@ -288,7 +288,7 @@ function imprimirDatos(array, id) {
     })
   } else {
 
-    div.innerHTML = `<div class="alert alert-info text-center" role="alert">
+    div.innerHTML = `<div class="bg-custom text-white fs-6 p-3 alert-info text-center" role="alert">
     No agregaste nada al carrito ...
   </div>`
   }
