@@ -441,3 +441,13 @@ div#swal2-html-container.swal2-html-container {
 button#swal2-confirm.swal2-styled.swal2-default-outline {
   color: var(--color2);
 }
+
+.form-error:focus{
+  outline: none;
+  border: 3px solid red;
+}
+
+.form-correct:focus{
+outline: none;
+border: 3px solid green;
+}
