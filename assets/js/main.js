@@ -495,9 +495,9 @@ if (document.title === 'PetShop | Home') {
       showCloseButton: true,
       showCancelButton: true,
       focusConfirm: false,
-      confirmButtonText: '<a href="./juguetes.html" class="text-decoration-none fw-bold text-white">Juguetes<a>',
+      confirmButtonText: '<a href="./juguetes.html" class="text-decoration-none text-white">Juguetes<a>',
       confirmButtonAriaLabel: 'Thumbs up, great!',
-      cancelButtonText:'<a href="./farmacia.html" class="text-decoration-none fw-bold text-white">Farmacia<a>',
+      cancelButtonText:'<a href="./farmacia.html" class="text-decoration-none text-white">Farmacia<a>',
       confirmButtonColor: "#fca922",
       cancelButtonColor: "#fca922",
       background: "#098ccf",
@@ -600,12 +600,3 @@ if (document.title === 'PetShop | Contacto') {
   }
 })
 }
-
-
-// MODAL
-
-// let grupo = document.querySelector('#grupo') 
-
-// grupo.addEventListener('click', () => {
-
-// })
