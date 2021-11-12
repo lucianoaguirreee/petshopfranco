@@ -87,7 +87,7 @@ fetch(endPoint)
                         <div id="div-cantidad-${elem._id}" class="text-center pb-3">
                             <label for="price" class="cantidad">Cantidad: </label>
                             <input id="cantidad-${elem._id}" class="text-center" type="number" name="cantidad-id"
-                                min="1" max="${elem.stock}" step="1" value="1" onKeyDown='return false'>
+                                min="1" max="${elem.stock}" step="1" value="1" onKeyDown='return false' disabled>
                         </div>
                         <div class="d-flex align-items-center justify-content-center">
                           <button id="${elem._id}" class="boton-comprar btn btn-primary bg-custom mb-3">Agregar al carrito</button>
@@ -109,7 +109,7 @@ fetch(endPoint)
                         <div id="div-cantidad-${elem._id}" class="text-center pb-3">
                             <label for="price" class="cantidad">Cantidad: </label>
                             <input id="cantidad-${elem._id}" class="text-center" type="number" name="cantidad-id"
-                                min="1" max="${elem.stock}" step="1" value="1" onKeyDown='return false'>
+                                min="1" max="${elem.stock}" step="1" value="1" onKeyDown='return false' disabled>
                         </div>
                         <div class="d-flex align-items-center justify-content-center">
                           <button id="${elem._id}" class="boton-comprar btn btn-primary bg-custom mb-3">Agregar al carrito</button>
@@ -209,7 +209,7 @@ function agregarAlCarrito(e) {
         
           <label for="price" class="cantidad">Cantidad: </label>
           <input id="cantidad-${e.target.id}" class="text-center" type="number" name="cantidad-id"
-              min="1" max="${varStockGlobal}" step="1" value="1" onKeyDown='return false'>
+              min="1" max="${varStockGlobal}" step="1" value="1" onKeyDown='return false' disabled>
               `;
         document.getElementById(e.target.id).disabled = false;
       }
