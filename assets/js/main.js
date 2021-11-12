@@ -570,12 +570,28 @@ inputs.forEach((input) => {
   input.addEventListener('blur', validarFormulario)
 })
 
+let checkboxs = document.querySelectorAll("input[type='checkbox']")
+let arrayCheck = Array.from(checkboxs)
+arrayCheck.forEach(check => check.addEventListener("change", e => {
+    let tipoState = e.target.value
+    let chequeado = e.target.checked
+    if(chequeado && tipoState == 'gato'){
+      document.getElementById('gato').checked = true
+    }else if(chequeado && tipoState == 'perro'){
+      document.getElementById('perro').checked = true
+    }else if(chequeado && tipoState == 'otro'){
+      document.getElementById('otro').checked = true
+    }
+ }))
+    
 
 if (document.title === 'PetShop | Contacto') {
   form.addEventListener('submit', (e) => {
     e.preventDefault();
   
-    if(campos['form-name'] && campos['form-email'] && campos['form-number'] & campos['form-subject']){
+    if(campos['form-name'] && campos['form-email'] && campos['form-number'] && campos['form-subject'] &&
+    (document.getElementById('gato').checked == true || document.getElementById('perro').checked == true ||
+    document.getElementById('otro').checked == true )){
         
         Swal.fire({
           icon: 'success',
