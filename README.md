@@ -13,7 +13,7 @@ Leonel Formini
 Sulamitta Julia Kauffman
 Luciano Aguirre
 
-## Lider de grupo: Luciano Aguirre
+### Lider de grupo: Luciano Aguirre
 
 ## En el frontend:
 - React.js 
