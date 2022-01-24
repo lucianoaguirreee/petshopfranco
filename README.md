@@ -16,10 +16,10 @@ Luciano Aguirre
 ### Lider de grupo: Luciano Aguirre
 
 ## En el frontend:
-- React.js 
-- Redux
-- Formik & Yup
-- Tailwind CSS
+- HTML5
+- CSS3
+- Bootstrap 5
+- JavaScript
 
 ## En el backend:
 - Solo consumimos una API
