@@ -4,14 +4,14 @@ Este proyecto se desarrolló durante el bootcamp de MindHub en stack MERN, Octub
 
 # Integrantes del grupo
 
-Cristian Araya
-Néstor Espinoza
-Amparo López
-Silvana Cerquatti
-Gaston Jimenez
-Leonel Formini
-Sulamitta Julia Kauffman
-Luciano Aguirre
+- Cristian Araya
+- Néstor Espinoza
+- Amparo López
+- Silvana Cerquatti
+- Gaston Jimenez
+- Leonel Formini
+- Sulamitta Julia Kauffman
+- Luciano Aguirre
 
 ### Lider de grupo: Luciano Aguirre
 
