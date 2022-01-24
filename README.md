@@ -1,6 +1,6 @@
-# petshopfranco
+# PetShop
 
-PetShop creado en grupo durante la cursada del bootcamp stack MERN de MH
+Este proyecto se desarrolló durante el bootcamp de MindHub en stack MERN, Octubre de 2021. Se desarrolló solo con fines educativos.
 
 # Integrantes del grupo
 
@@ -13,8 +13,17 @@ Leonel Formini
 Sulamitta Julia Kauffman
 Luciano Aguirre
 
-###Lider de grupo: Luciano Aguirre
+##Lider de grupo: Luciano Aguirre
 
-# Prueba la pagina 
+## En el frontend:
+- React.js 
+- Redux
+- Formik & Yup
+- Tailwind CSS
 
-https://lucianhoff.github.io/petshopfranco/
+## En el backend:
+- Solo consumimos una API
+
+Puede ver una demostración en vivo de esta aplicación alojada en [GitHub Pages](https://lucianhoff.github.io/petshopfranco/) y una descripción detallada de lo que puede hacer con la aplicación (en el lado del cliente), en [youtube](https://www.youtube.com/).
+
+Siéntete libre de forkearlo y jugar con él, escribirme en caso de cualquier duda!
